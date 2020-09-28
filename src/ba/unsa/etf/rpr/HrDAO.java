@@ -27,7 +27,7 @@ public class HrDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            regenerateDateBase();
+            regenerateDataBase();
             try {
                 getEmployeesPS = conn.prepareStatement("select * from  employees");
             } catch (SQLException ex) {
@@ -36,7 +36,7 @@ public class HrDAO {
         }
     }
 
-    private void regenerateDateBase() {
+    private void regenerateDataBase() {
         Scanner ulaz= null;
         try {
             ulaz = new Scanner(new FileInputStream("baza.db.sql"));
