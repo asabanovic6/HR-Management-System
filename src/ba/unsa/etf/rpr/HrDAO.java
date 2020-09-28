@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class HrDAO {
     private static HrDAO instance;
     private Connection conn;
-    private PreparedStatement getEmployeesPS;
+    private PreparedStatement getEmployeePS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -23,19 +23,31 @@ public class HrDAO {
             e.printStackTrace();
         }
         try {
-            getEmployeesPS = conn.prepareStatement("SELECT * FROM employees");
+            getEmployeePS = conn.prepareStatement("SELECT * FROM employees");
         }
         catch (SQLException e) {
             e.printStackTrace();
             regenerateDataBase();
             try {
-                getEmployeesPS = conn.prepareStatement("select * from  employees");
+                getEmployeePS = conn.prepareStatement("select * from  employees");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
     }
+    public static void removeInstance() {
+        if (instance == null) return;
+        instance.close();
+        instance = null;
+    }
 
+    public void close() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     private void regenerateDataBase() {
         Scanner ulaz= null;
         try {
@@ -64,5 +76,13 @@ public class HrDAO {
         }
     }
 
-
+    //  This method will take a database to default
+    public void vratiBazuNaDefault() throws SQLException {
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate("DELETE FROM employees");
+        stmt.executeUpdate("DELETE FROM jobs");
+        stmt.executeUpdate("DELETE FROM departments");
+        stmt.executeUpdate("DELETE FROM locations");
+        regenerateDataBase();
+    }
 }

@@ -11,11 +11,12 @@ public class Employee {
     private Job job;
     private int Salary;
     private double cmp;
+    private LocalDateTime expireDate;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String email, LocalDateTime hireDate, Department department, Job job, int salary, double cmp) {
+    public Employee(int employeeId, String employeeName, String email, LocalDateTime hireDate, Department department, Job job, int salary, double cmp, LocalDateTime expireDate) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.email = email;
@@ -24,6 +25,7 @@ public class Employee {
         this.job = job;
         Salary = salary;
         this.cmp = cmp;
+        this.expireDate = expireDate;
     }
 
     public int getEmployeeId() {
@@ -88,5 +90,13 @@ public class Employee {
 
     public void setCmp(double cmp) {
         this.cmp = cmp;
+    }
+
+    public LocalDateTime getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(LocalDateTime expireDate) {
+        this.expireDate = expireDate;
     }
 }
