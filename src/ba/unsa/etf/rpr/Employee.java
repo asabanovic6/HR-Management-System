@@ -1,28 +1,29 @@
 package ba.unsa.etf.rpr;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Employee {
     private int employeeId;
     private String employeeName;
     private String email;
-    private LocalDateTime hireDate;
-    private Department department;
-    private Job job;
+    private Date hireDate;
+    private int departmentId;
+    private int jobId;
     private int Salary;
     private double cmp;
-    private LocalDateTime expireDate;
+    private Date expireDate;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String email, LocalDateTime hireDate, Department department, Job job, int salary, double cmp, LocalDateTime expireDate) {
+    public Employee(int employeeId, String employeeName, String email, Date hireDate, int departmentId, int jobId, int salary, double cmp, Date expireDate) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.email = email;
         this.hireDate = hireDate;
-        this.department = department;
-        this.job = job;
+        this.departmentId = departmentId;
+        this.jobId = jobId;
         Salary = salary;
         this.cmp = cmp;
         this.expireDate = expireDate;
@@ -52,28 +53,28 @@ public class Employee {
         this.email = email;
     }
 
-    public LocalDateTime getHireDate() {
+    public Date getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(LocalDateTime hireDate) {
+    public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
 
-    public Department getDepartment() {
-        return department;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public Job getJob() {
-        return job;
+    public int getJobId() {
+        return jobId;
     }
 
-    public void setJob(Job job) {
-        this.job = job;
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
     }
 
     public int getSalary() {
@@ -92,11 +93,12 @@ public class Employee {
         this.cmp = cmp;
     }
 
-    public LocalDateTime getExpireDate() {
+    public Date getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDateTime expireDate) {
+    public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
+
 }

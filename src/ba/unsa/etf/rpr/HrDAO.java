@@ -23,18 +23,38 @@ public class HrDAO {
             e.printStackTrace();
         }
         try {
-            getEmployeePS = conn.prepareStatement("SELECT * FROM employees");
+            getEmployeePS = conn.prepareStatement("SELECT * FROM employees WHERE employee_id=?");
         }
         catch (SQLException e) {
             e.printStackTrace();
             regenerateDataBase();
             try {
-                getEmployeePS = conn.prepareStatement("select * from  employees");
+                getEmployeePS = conn.prepareStatement("select * from  employees WHERE employee_id=?");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
     }
+    private Employee getEmployeeFromResultSet (ResultSet rs, Department d) throws SQLException {
+        if (rs.getInt(6)==0) {
+        return new Employee(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getInt(d.getDepartmentId()),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getDate(10));
+        }
+        else {
+            return new Manager(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getInt(d.getDepartmentId()),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getDate(10),rs.getInt(6));
+        }
+    }
+    private Employee getEmployee(int id, Department d) {
+        try {
+            getEmployeePS.setInt(1, id);
+            ResultSet rs = getEmployeePS.executeQuery();
+            if (!rs.next()) return null;
+            return getEmployeeFromResultSet(rs, d);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void removeInstance() {
         if (instance == null) return;
         instance.close();
@@ -85,4 +105,6 @@ public class HrDAO {
         stmt.executeUpdate("DELETE FROM locations");
         regenerateDataBase();
     }
+
+
 }

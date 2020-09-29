@@ -5,14 +5,13 @@ CREATE TABLE IF NOT EXISTS "employees" (
 	"email"	TEXT,
 	"hire_date"	DATE,
 	"department_id"	INTEGER,
-	"manager_id"	INTEGER,
+	"manager_id"	INTEGER NOT NULL,
 	"job_id"	INTEGER,
 	"salary"	INTEGER,
 	"cmp"	REAL,
 	"expire_date"	DATE,
 	PRIMARY KEY("employee_id"),
 	FOREIGN KEY("department_id") REFERENCES "departments"("department_id"),
-	FOREIGN KEY("manager_id") REFERENCES "employees"("employee_id"),
 	FOREIGN KEY("job_id") REFERENCES "jobs"("job_id")
 );
 CREATE TABLE IF NOT EXISTS "departments" (
@@ -36,10 +35,10 @@ CREATE TABLE IF NOT EXISTS "locations" (
 	"city"	TEXT,
 	PRIMARY KEY("location_id")
 );
-INSERT INTO "employees" VALUES (1,'Amina Sabanovic','asabanovi6@etf.unsa.ba','05.10.2010.',1,NULL,1,1500,NULL,'05.10.2020.');
+INSERT INTO "employees" VALUES (1,'Amina Sabanovic','asabanovi6@etf.unsa.ba','05.10.2010.',1,0,1,1500,NULL,'05.10.2020.');
 INSERT INTO "employees" VALUES (2,'Hana Veladzic','hanaveladzic@gmail.com','10.10.2011.',1,1,2,1000,0.2,'05.10.2016.');
 INSERT INTO "employees" VALUES (3,'Adnan Tomic ','adnant98@live.com','18.09.2011.',1,1,3,1200,0.1,'05.10.2016.');
-INSERT INTO "employees" VALUES (4,'Nina Skopljak','snina1@etf.unsa.ba','15.03.2015.',2,NULL,1,1700,0.1,'05.10.2030.');
+INSERT INTO "employees" VALUES (4,'Nina Skopljak','snina1@etf.unsa.ba','15.03.2015.',2,0,1,1700,0.1,'05.10.2030.');
 INSERT INTO "employees" VALUES (5,'Davor Sekulic','dsekulic3@etf.unsa.ba','18.10.2019.',2,4,3,1300,NULL,'05.10.2025.');
 INSERT INTO "employees" VALUES (6,'Sandra Zec','zecsandra1@gmail.com','18.10.2019.',2,4,3,1300,0.1,'05.10.2025.');
 INSERT INTO "employees" VALUES (7,'Mario Drmac','dmario1@gmail.com','20.10.2019.',2,4,4,1000,NULL,'05.10.2025.');
