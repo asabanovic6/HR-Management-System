@@ -44,15 +44,34 @@ public class HrDAO {
             getEmployeePS.setInt(1, id);
             ResultSet rs = getEmployeePS.executeQuery();
             if (!rs.next()) return null;
-            return getEmployeeFromResultSet(rs);
+           return getEmployeeFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    public Manager getManager (int id) {
+        try {
+            getEmployeePS.setInt(1, id);
+            ResultSet rs = getEmployeePS.executeQuery();
+            if (!rs.next()) return null;
+            else if (rs.getInt(6)==0) return getManagerFromResultSet(rs);
+            else {
+                throw new NotManagerException("This employee is not manager!");
+            }
+        } catch (SQLException | NotManagerException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
-        return  new Employee(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getString(10));
+            return new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10));
+        }
+
+    private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
+        return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
     }
 
 

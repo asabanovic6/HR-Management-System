@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HrDAOTest {
     private HrDAO dao = HrDAO.getInstance();
@@ -20,7 +19,7 @@ public class HrDAOTest {
     }
 
     @Test
-    void regenerateFile() {
+   public void regenerateFile() {
         // Testiramo da li će fajl ponovo biti kreiran nakon brisanja
         // Ovaj test može padati na Windowsu zbog lockinga, u tom slučaju pokrenite ovaj test
         // odvojeno od ostalih
@@ -32,9 +31,23 @@ public class HrDAOTest {
         assertEquals("Amina Sabanovic", emp.getEmployeeName());
     }
    @Test
-    void test1Datum () {
+    public void test1Date () {
        Employee emp = dao.getEmployee(1);
        LocalDateTime date = LocalDateTime.of(2010, 10 , 05, 00, 00);
        assertEquals(date, emp.getHireDate());
    }
+
+   @Test
+   public void test1Manager () {
+       Manager man = dao.getManager(1);
+       assertEquals("Amina Sabanovic", man.getEmployeeName());
+   }
+    @Test
+    public void test2Manager () {
+        AtomicReference<Manager> man = null;
+      assertThrows(NotManagerException.class,()-> man.set(dao.getManager(2)),"This employee is not manager!" );
+    }
+
+
+
 }
