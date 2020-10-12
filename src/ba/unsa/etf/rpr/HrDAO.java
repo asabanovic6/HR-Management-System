@@ -3,12 +3,13 @@ package ba.unsa.etf.rpr;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HrDAO {
     private static HrDAO instance;
     private Connection conn;
-    private PreparedStatement getEmployeePS;
+    private PreparedStatement getEmployeePS,getEmployeesPS,getDepartmentPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -17,7 +18,7 @@ public class HrDAO {
 
     private HrDAO () {
         try {
-            conn= DriverManager.getConnection("jdbc:sqlite.baza.db");
+            conn= DriverManager.getConnection("jdbc:sqlite:baza.db");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -29,31 +30,31 @@ public class HrDAO {
             e.printStackTrace();
             regenerateDataBase();
             try {
-                getEmployeePS = conn.prepareStatement("select * from  employees WHERE employee_id=?");
+                getEmployeePS = conn.prepareStatement("SELECT * FROM employees WHERE employee_id=?");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
+
+
     }
-    private Employee getEmployeeFromResultSet (ResultSet rs, Department d) throws SQLException {
-        if (rs.getInt(6)==0) {
-        return new Employee(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getInt(d.getDepartmentId()),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getDate(10));
-        }
-        else {
-            return new Manager(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getInt(d.getDepartmentId()),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getDate(10),rs.getInt(6));
-        }
-    }
-    private Employee getEmployee(int id, Department d) {
+
+    public Employee getEmployee(int id) {
         try {
             getEmployeePS.setInt(1, id);
             ResultSet rs = getEmployeePS.executeQuery();
             if (!rs.next()) return null;
-            return getEmployeeFromResultSet(rs, d);
+            return getEmployeeFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+    private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
+        return  new Employee(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(7),rs.getInt(8),rs.getDouble(9),rs.getString(10));
+    }
+
 
     public static void removeInstance() {
         if (instance == null) return;
@@ -77,7 +78,7 @@ public class HrDAO {
             while (ulaz.hasNext()) {
 
                 sqlUpit += ulaz.nextLine();
-                if (sqlUpit.charAt(sqlUpit.length() - 1) == ';') {
+                if ( sqlUpit.length() > 1 && sqlUpit.charAt( sqlUpit.length()-1 ) == ';') {
                     try {
                         Statement stmt = conn.createStatement();
                         stmt.execute(sqlUpit);
@@ -97,7 +98,7 @@ public class HrDAO {
     }
 
     //  This method will take a database to default
-    public void vratiBazuNaDefault() throws SQLException {
+    public void returnBaseOnDefault() throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("DELETE FROM employees");
         stmt.executeUpdate("DELETE FROM jobs");

@@ -3,16 +3,20 @@ package ba.unsa.etf.rpr;
 public class Department {
     private int departmentId;
     private String departmentName;
-    private Location location;
+    private int managerId;
+    private int locationId;
 
     public Department() {
     }
 
-    public Department(int departmentId, String departmentName, Location location) {
+    public Department(int departmentId, String departmentName,int managerId, int locationId) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
-        this.location = location;
+        this.managerId=managerId;
+        this.locationId = locationId;
     }
+
+
 
     public int getDepartmentId() {
         return departmentId;
@@ -30,11 +34,11 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public Location getLocation() {
-        return location;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationId(int location) {
+        this.locationId = location;
     }
 }

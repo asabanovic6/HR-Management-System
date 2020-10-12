@@ -1,33 +1,40 @@
 package ba.unsa.etf.rpr;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Employee {
     private int employeeId;
     private String employeeName;
     private String email;
-    private Date hireDate;
+    private LocalDateTime hireDate;
     private int departmentId;
     private int jobId;
     private int Salary;
     private double cmp;
-    private Date expireDate;
+    private LocalDateTime expireDate;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String email, Date hireDate, int departmentId, int jobId, int salary, double cmp, Date expireDate) {
+    public Employee(int employeeId, String employeeName, String email, String hireDate, int departmentId, int jobId, int salary, double cmp, String expireDate) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.hireDate = LocalDateTime.parse(hireDate, formatter);
+
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.email = email;
-        this.hireDate = hireDate;
         this.departmentId = departmentId;
         this.jobId = jobId;
         Salary = salary;
         this.cmp = cmp;
-        this.expireDate = expireDate;
+
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.expireDate = LocalDateTime.parse(expireDate, formatter1);
     }
+
 
     public int getEmployeeId() {
         return employeeId;
@@ -53,12 +60,13 @@ public class Employee {
         this.email = email;
     }
 
-    public Date getHireDate() {
+    public LocalDateTime getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+    public void setHireDate(String hireDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.hireDate = LocalDateTime.parse(hireDate, formatter);
     }
 
     public int getDepartmentId() {
@@ -93,12 +101,13 @@ public class Employee {
         this.cmp = cmp;
     }
 
-    public Date getExpireDate() {
+    public LocalDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
+    public void setExpireDate(String expireDate) {
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.expireDate = LocalDateTime.parse(expireDate, formatter1);
     }
 
 }
