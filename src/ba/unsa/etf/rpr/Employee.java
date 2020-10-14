@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Employee {
     private int employeeId;
@@ -38,7 +37,6 @@ public class Employee {
         if (expireDate!=null && expireDate!="") this.employment=TypeOfEmployment.PERMANENT;
         else this.employment=TypeOfEmployment.TEMPORARY;
     }
-
 
     public int getEmployeeId() {
         return employeeId;
@@ -121,4 +119,5 @@ public class Employee {
     public void setEmployment(TypeOfEmployment employment) {
         this.employment = employment;
     }
+
 }

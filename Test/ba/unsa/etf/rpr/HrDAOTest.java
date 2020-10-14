@@ -21,9 +21,7 @@ public class HrDAOTest {
 
     @Test
    public void regenerateFile() {
-        // Testiramo da li će fajl ponovo biti kreiran nakon brisanja
-        // Ovaj test može padati na Windowsu zbog lockinga, u tom slučaju pokrenite ovaj test
-        // odvojeno od ostalih
+
        HrDAO.removeInstance();
         File dbfile = new File("baza.db");
         dbfile.delete();
@@ -76,10 +74,10 @@ public class HrDAOTest {
     }
 
     @Test
-    public void testGetEmployeesFromManager () {
-        ArrayList<Employee> employees = dao.getEmployeesFromManager(1);
-        assertEquals("Adnan Tomic ", employees.get(0).getEmployeeName());
-        assertEquals("Hana Veladzic", employees.get(1).getEmployeeName());
+    public void testGetWorkersFromManager () {
+        ArrayList<Worker> workers = dao.getWorkersFromManager(1);
+        assertEquals("Adnan Tomic ", workers.get(0).getEmployeeName());
+        assertEquals("Hana Veladzic", workers.get(1).getEmployeeName());
     }
 
     @Test

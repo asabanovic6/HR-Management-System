@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class HrDAO {
     private static HrDAO instance;
     private Connection conn;
-    private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getEmployeesFromManagerPS,getDepartmentsPS;
+    private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,getDepartmentsPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -38,7 +38,7 @@ public class HrDAO {
         try {
             getEmployeesFromDepartmentPS = conn.prepareStatement("SELECT * FROM employees WHERE department_id=? ORDER BY employee_name");
             getManagerFromDepartmentPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=0 AND department_id=?");
-            getEmployeesFromManagerPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=? ORDER BY employee_name");
+            getWorkersFromManagerPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=? ORDER BY employee_name");
             getDepartmentsPS = conn.prepareStatement("SELECT * FROM departments");
             getDepartmentPS=conn.prepareStatement("SELECT * FROM departments WHERE department_id=?");
         } catch (SQLException e) {
@@ -46,14 +46,14 @@ public class HrDAO {
         }
     }
 
-    public ArrayList<Employee> getEmployeesFromManager (int managerId) {
-        ArrayList<Employee> result = new ArrayList<>();
+    public ArrayList<Worker> getWorkersFromManager (int managerId) {
+        ArrayList<Worker> result = new ArrayList<>();
         try {
-            getEmployeesFromManagerPS.setInt(1,managerId);
-            ResultSet rs=getEmployeesFromManagerPS.executeQuery();
+            getWorkersFromManagerPS.setInt(1,managerId);
+            ResultSet rs=getWorkersFromManagerPS.executeQuery();
             while (rs.next()) {
-                Employee employee = getEmployeeFromResultSet(rs);
-                result.add(employee);
+                Worker workers = (Worker) getEmployeeFromResultSet(rs);
+                result.add(workers);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class HrDAO {
             ResultSet rs = getEmployeePS.executeQuery();
             if (!rs.next()) return null;
             else if (rs.getInt(6)==0) return getManagerFromResultSet(rs); // If employee is manager then his/her ManagerID is 0
-            else throw new NullPointerException("This employee is not manager!");    // If employee is not manager then he/she has manager, and his/her ManagerId is EmployeeID of his/her manager
+            else throw new NullPointerException("This employee is not manager!");    // If employee is not manager then he/she is worker and he/she has manager, and his/her ManagerId is EmployeeID of his/her manager
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -151,8 +151,13 @@ public class HrDAO {
         }
     }
     private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
-            return new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10));
+        if (rs.getInt(6) == 0)
+            return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), rs.getInt(6));
+        else {
+            Manager manager = getManager(rs.getInt(6));
+            return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), manager);
         }
+    }
 
     private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
         return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
