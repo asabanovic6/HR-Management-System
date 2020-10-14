@@ -14,6 +14,7 @@ public class Employee {
     private int Salary;
     private double cmp;
     private LocalDateTime expireDate;
+    private TypeOfEmployment employment;
 
     public Employee() {
     }
@@ -33,6 +34,9 @@ public class Employee {
 
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.expireDate = LocalDateTime.parse(expireDate, formatter1);
+
+        if (expireDate!=null && expireDate!="") this.employment=TypeOfEmployment.PERMANENT;
+        else this.employment=TypeOfEmployment.TEMPORARY;
     }
 
 
@@ -110,4 +114,11 @@ public class Employee {
         this.expireDate = LocalDateTime.parse(expireDate, formatter1);
     }
 
+    public TypeOfEmployment getEmployment() {
+        return employment;
+    }
+
+    public void setEmployment(TypeOfEmployment employment) {
+        this.employment = employment;
+    }
 }

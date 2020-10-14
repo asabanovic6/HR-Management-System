@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import java.util.Objects;
+
 public class Department {
     private int departmentId;
     private String departmentName;
@@ -41,4 +43,17 @@ public class Department {
     public void setLocationId(int location) {
         this.locationId = location;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Department)) return false;
+        Department that = (Department) o;
+        return getDepartmentId() == that.getDepartmentId() &&
+                managerId == that.managerId &&
+                getLocationId() == that.getLocationId() &&
+                Objects.equals(getDepartmentName(), that.getDepartmentName());
+    }
+
+
 }

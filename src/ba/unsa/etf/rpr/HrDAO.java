@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class HrDAO {
     private static HrDAO instance;
     private Connection conn;
-    private PreparedStatement getEmployeePS,getEmployeesPS,getDepartmentPS;
+    private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getEmployeesFromManagerPS,getDepartmentsPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -35,9 +35,85 @@ public class HrDAO {
                 ex.printStackTrace();
             }
         }
-
-
+        try {
+            getEmployeesFromDepartmentPS = conn.prepareStatement("SELECT * FROM employees WHERE department_id=? ORDER BY employee_name");
+            getManagerFromDepartmentPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=0 AND department_id=?");
+            getEmployeesFromManagerPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=? ORDER BY employee_name");
+            getDepartmentsPS = conn.prepareStatement("SELECT * FROM departments");
+            getDepartmentPS=conn.prepareStatement("SELECT * FROM departments WHERE department_id=?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    public ArrayList<Employee> getEmployeesFromManager (int managerId) {
+        ArrayList<Employee> result = new ArrayList<>();
+        try {
+            getEmployeesFromManagerPS.setInt(1,managerId);
+            ResultSet rs=getEmployeesFromManagerPS.executeQuery();
+            while (rs.next()) {
+                Employee employee = getEmployeeFromResultSet(rs);
+                result.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<Department> getDepartments() {
+        ArrayList<Department> result = new ArrayList();
+        try {
+            ResultSet rs = getDepartmentsPS.executeQuery();
+            while (rs.next()) {
+                Department dep = getDepartmentFromResultSet(rs);
+                result.add(dep);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<Employee> getEmployeesFromDepartment(int departmentId) throws NonExistentDepartment {
+        if (!doesDepartmentExist(departmentId)) throw new NonExistentDepartment("This department doesn't exist!");
+        ArrayList<Employee> result = new ArrayList();
+        try {
+            getEmployeesFromDepartmentPS.setInt(1,departmentId);
+            ResultSet rs = getEmployeesFromDepartmentPS.executeQuery();
+            while (rs.next()) {
+                Employee employee = getEmployeeFromResultSet(rs);
+                result.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private boolean doesDepartmentExist (int departmentId) {
+        ArrayList<Department> deps = new ArrayList<>();
+        deps = getDepartments();
+        for (Department dep : deps) {
+            if (dep.getDepartmentId()==departmentId) return true;
+        }
+        return false;
+    }
+    public Manager getManagerFromDepartment(int departmentId) throws NonExistentDepartment {
+        if (!doesDepartmentExist(departmentId)) throw new NonExistentDepartment("This department doesn't exist!");
+        Manager manager = new Manager();
+        try {
+                getManagerFromDepartmentPS.setInt(1, departmentId);
+                ResultSet rs = getManagerFromDepartmentPS.executeQuery();
+                manager = getManagerFromResultSet(rs);
+
+        } catch (SQLException  e) {
+            e.printStackTrace();
+        }
+        return manager;
+    }
+
+
 
     public Employee getEmployee(int id) {
         try {
@@ -56,22 +132,34 @@ public class HrDAO {
             getEmployeePS.setInt(1, id);
             ResultSet rs = getEmployeePS.executeQuery();
             if (!rs.next()) return null;
-            else if (rs.getInt(6)==0) return getManagerFromResultSet(rs);
-            else {
-                throw new NotManagerException("This employee is not manager!");
-            }
-        } catch (SQLException | NotManagerException e) {
+            else if (rs.getInt(6)==0) return getManagerFromResultSet(rs); // If employee is manager then his/her ManagerID is 0
+            else throw new NullPointerException("This employee is not manager!");    // If employee is not manager then he/she has manager, and his/her ManagerId is EmployeeID of his/her manager
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-
+    public Department getDepartment (int id) {
+        try {
+            getDepartmentPS.setInt(1, id);
+            ResultSet rs = getDepartmentPS.executeQuery();
+            if (!rs.next()) return null;
+            return getDepartmentFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
             return new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10));
         }
 
     private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
         return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
+    }
+
+    private Department getDepartmentFromResultSet ( ResultSet rs) throws SQLException {
+        return new Department(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
     }
 
 
