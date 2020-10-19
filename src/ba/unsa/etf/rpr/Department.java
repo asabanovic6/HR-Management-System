@@ -44,13 +44,21 @@ public class Department {
         this.locationId = location;
     }
 
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Department)) return false;
         Department that = (Department) o;
         return getDepartmentId() == that.getDepartmentId() &&
-                managerId == that.managerId &&
+                getManagerId() == that.getManagerId() &&
                 getLocationId() == that.getLocationId() &&
                 Objects.equals(getDepartmentName(), that.getDepartmentName());
     }

@@ -8,9 +8,9 @@ public class Manager extends Employee {
     public Manager() {
     }
 
-    public Manager(int employeeId, String employeeName, String email, String hireDate, int departmentId, int jobId, int salary, double cmp, String expireDate, int manager_id) {
+    public Manager(int employeeId, String employeeName, String email, String hireDate, int departmentId, int jobId, int salary, double cmp, String expireDate, int managerId) {
         super(employeeId, employeeName, email, hireDate, departmentId, jobId, salary, cmp, expireDate);
-        this.managerId = manager_id;
+        this.managerId = managerId;
     }
 
     public int getManagerId() {
