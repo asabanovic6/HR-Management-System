@@ -16,6 +16,13 @@ public class Job {
         this.minSalary = minSalary;
     }
 
+    public Job(Job job) {
+        this.jobId=job.getJobId();
+        this.jobTitle=job.getJobTitle();
+        this.minSalary=job.getMinSalary();
+        this.maxSalary=job.getMaxSalary();
+    }
+
     public int getJobId() {
         return jobId;
     }

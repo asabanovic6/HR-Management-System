@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -79,7 +79,7 @@ public class HrDAO {
     //We use this method if we want to change salary, commission precentage or expireDate
     public void editEmployee (Employee employee)  {
         try {
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             editEmployeePS.setString(1,expireDate);
             editEmployeePS.setInt(2,employee.getSalary());
@@ -101,7 +101,7 @@ public class HrDAO {
             addEmployeePS.setInt(1, id);
             addEmployeePS.setString(2,employee.getEmployeeName());
             addEmployeePS.setString(3,employee.getEmail());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String hireDate = formatter.format(employee.getHireDate());
             addEmployeePS.setString(4,hireDate);
             addEmployeePS.setInt(5,department.getDepartmentId());
@@ -109,7 +109,7 @@ public class HrDAO {
             addEmployeePS.setInt(7,1);
             addEmployeePS.setInt(8,employee.getSalary());
             addEmployeePS.setDouble(9,employee.getCmp());
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
             addEmployeePS.executeUpdate();
@@ -133,7 +133,7 @@ public class HrDAO {
             addEmployeePS.setInt(1, id);
             addEmployeePS.setString(2,employee.getEmployeeName());
             addEmployeePS.setString(3,employee.getEmail());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String hireDate = formatter.format(employee.getHireDate());
             addEmployeePS.setString(4,hireDate);
             addEmployeePS.setInt(5,employee.getDepartmentId());
@@ -141,7 +141,7 @@ public class HrDAO {
             addEmployeePS.setInt(7,1);
             addEmployeePS.setInt(8,employee.getSalary());
             addEmployeePS.setDouble(9,employee.getCmp());
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
             addEmployeePS.executeUpdate();
@@ -161,7 +161,7 @@ public class HrDAO {
             addEmployeePS.setInt(1, id);
             addEmployeePS.setString(2,employee.getEmployeeName());
             addEmployeePS.setString(3,employee.getEmail());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String hireDate = formatter.format(employee.getHireDate());
             addEmployeePS.setString(4,hireDate);
             addEmployeePS.setInt(5,employee.getDepartmentId());
@@ -169,7 +169,7 @@ public class HrDAO {
             addEmployeePS.setInt(7,employee.getJobId());
             addEmployeePS.setInt(8,employee.getSalary());
             addEmployeePS.setDouble(9,employee.getCmp());
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
             addEmployeePS.executeUpdate();
@@ -450,15 +450,18 @@ public class HrDAO {
         }
     }
     private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
-        if (rs.getInt(6) == 0)
+        if (rs.getInt(6) == 0) {
+
             return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), rs.getInt(6));
-        else {
+        }else {
+
             Manager manager = getManager(rs.getInt(6));
             return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), manager);
         }
     }
 
     private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
+
         return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
     }
 

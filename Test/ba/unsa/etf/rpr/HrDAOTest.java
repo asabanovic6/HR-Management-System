@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -32,7 +32,7 @@ public class HrDAOTest {
    @Test
     public void test1Date () {
        Employee emp = dao.getEmployee(1);
-       LocalDateTime date = LocalDateTime.of(2010, 10 , 05, 00, 00);
+       LocalDate date = LocalDate.of(2010, 10 , 05);
        assertEquals(date, emp.getHireDate());
    }
 
@@ -158,15 +158,16 @@ public class HrDAOTest {
         worker.setEmail("senadaSabanovic@gmail.com");
         worker.setCmp(0.1);
         worker.setSalary(1000);
+
         worker.setJobId(2);
-        worker.setHireDate("2020-10-05 00:00");
-        worker.setExpireDate("2030-10-05 00:00");
+        worker.setHireDate("2020-10-05");
+        worker.setExpireDate("2030-10-05");
         worker.setDepartmentId(2);
 
         dao.addWorker(worker);
         ArrayList<Worker> workers = dao.getWorkersFromManager(4);
         assertEquals("Senada Šabanović", workers.get(3).getEmployeeName());
-        LocalDateTime date = LocalDateTime.of(2020, 10 , 05, 00, 00);
+        LocalDate date = LocalDate.of(2020, 10 , 05);
         assertEquals(date,workers.get(3).getHireDate());
     }
     @Test
@@ -178,8 +179,8 @@ public class HrDAOTest {
         man.setCmp(0.1);
         man.setSalary(1000);
         man.setJobId(1);
-        man.setHireDate("2020-10-05 00:00");
-        man.setExpireDate("2030-10-05 00:00");
+        man.setHireDate("2020-10-05");
+        man.setExpireDate("2030-10-05");
         man.setDepartmentId(3);
         dao.addManager(man);
         Department dep = new Department();

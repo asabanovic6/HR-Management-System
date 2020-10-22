@@ -7,8 +7,8 @@ public class Worker extends Employee {
     public Worker() {
     }
 
-    public Worker(int employeeId, String employeeName, String email, String hireDate, int departmentId, int jobId, int salary, double cmp, String expireDate, Manager manager) {
-        super(employeeId, employeeName, email, hireDate, departmentId, jobId, salary, cmp, expireDate);
+    public Worker(int employeeId, String employeeName, String email, String hireDate, int departmentId, int job, int salary, double cmp, String expireDate, Manager manager) {
+        super(employeeId, employeeName, email, hireDate, departmentId, job, salary, cmp, expireDate);
         this.manager = manager;
     }
 
