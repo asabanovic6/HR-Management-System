@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import org.assertj.core.internal.bytebuddy.asm.Advice;
@@ -22,7 +24,6 @@ public class EmployeeController {
     public TextField fieldEmployeeName;
     public TextField fieldEmail;
     public TextField fieldManager;
-    public TextField fieldJobId;
     public TextField fieldDepartment;
     public TextField fieldSalary;
     public TextField fieldCmp;
@@ -31,7 +32,11 @@ public class EmployeeController {
     public ChoiceBox<Job> choiceJob;
     public ObservableList<Job> jobs= FXCollections.observableArrayList();
     private Employee employee;
+    @FXML
+    private ImageView imgView;
 
+    public EmployeeController() {
+    }
 
     public EmployeeController(Employee employee, ArrayList<Job> jobs) {
         this.employee = employee;
@@ -58,7 +63,96 @@ public class EmployeeController {
       else {
           choiceJob.getSelectionModel().selectFirst();
       }
+        fieldEmployeeName.textProperty().addListener((obs, oldName, newName) -> {
+
+            if (!newName.isEmpty() && ValidateEmployeeName(newName) ) {
+                fieldEmployeeName.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldEmployeeName.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldEmployeeName.getStyleClass().removeAll("poljeIspravno");
+                fieldEmployeeName.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
+        fieldEmail.textProperty().addListener((obs, oldName, newName) -> {
+
+            if (!newName.isEmpty() && ValidateEmail(newName) ) {
+                fieldEmail.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldEmail.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldEmail.getStyleClass().removeAll("poljeIspravno");
+                fieldEmail.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
+        fieldSalary.textProperty().addListener((obs, oldValue, newValue) -> {
+
+            if (!newValue.isEmpty() && ValidateSalary(newValue) ) {
+                fieldSalary.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldSalary.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldSalary.getStyleClass().removeAll("poljeIspravno");
+                fieldSalary.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
+        fieldCmp.textProperty().addListener((obs, oldValue, newValue) -> {
+
+            if (!newValue.isEmpty() && ValidateCmp(newValue) ) {
+                fieldCmp.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldCmp.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldCmp.getStyleClass().removeAll("poljeIspravno");
+                fieldCmp.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
+        imgView.setImage(
+                new Image("images/application-exit.png")
+        );
   }
+
+    private boolean ValidateCmp(String newValue) {
+        for (int i=1;i<newValue.length();i++)
+            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
+        double cmp = 0;
+        try {
+            cmp = Double.parseDouble(fieldCmp.getText());
+        } catch (NumberFormatException e) {
+            // ...
+        }
+       if (cmp<0) return false;
+       else return true;
+    }
+
+    private boolean ValidateSalary(String newValue) {
+        for (int i=1;i<newValue.length();i++)
+        if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in salary textfield
+        int salary = 0;
+        try {
+            salary = Integer.parseInt(fieldSalary.getText());
+        } catch (NumberFormatException e) {
+            // ...
+        }
+        if(salary<=0) return false;
+        else return true;
+    }
+
+
+    private boolean ValidateEmployeeName(String newName) {
+        if (newName.length()>35) return false;
+        if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
+
+        for (int i=1;i<newName.length();i++) {
+            if (!((newName.charAt(i) >= 'A' && newName.charAt(i) <= 'Z') || (newName.charAt(i) >= 'a' && newName.charAt(i) <= 'z') || (newName.charAt(i)>=48 && newName.charAt(i)<=57) || newName.charAt(i)==32 )) return false;
+        }
+        return true;
+    }
+    private boolean ValidateEmail (String email) {
+        int brojac=0;
+        if (email.charAt(0)=='@' || email.charAt(email.length()-1)=='@') return false;
+        for (int i =1;i<email.length();i++) {
+            if (email.charAt(i)=='@') brojac++;
+        }
+        if (brojac==0) return false;
+        return true;
+    }
 
     public Employee getEmployee() {
         return employee;
@@ -69,7 +163,11 @@ public class EmployeeController {
         Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
-
+    public void AddNewJob (ActionEvent actionEvent) {
+        employee = null;
+        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
+        stage.close();
+    }
     public void clickOk(ActionEvent actionEvent) {
         boolean Ok = true;
 
