@@ -79,10 +79,7 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </GridPane.margin></TextField>
-      <TextField fx:id="fieldDepartment" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </GridPane.margin></TextField>
+
       <TextField fx:id="fieldManager" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -130,6 +127,19 @@
                </HBox.margin>
             </ChoiceBox>
             <Button fx:id="BtnAddNewJob" mnemonicParsing="false" onAction="#AddNewJob" text="Dodaj novi posao">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children></HBox>
+      <HBox prefHeight="64.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <ChoiceBox fx:id="choiceDepartment" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <Button fx:id="BtnAddNewDepartment" mnemonicParsing="false" onAction="#AddNewDepartment" text="Dodaj novi odjel">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </HBox.margin>

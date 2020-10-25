@@ -24,13 +24,14 @@ public class EmployeeController {
     public TextField fieldEmployeeName;
     public TextField fieldEmail;
     public TextField fieldManager;
-    public TextField fieldDepartment;
     public TextField fieldSalary;
     public TextField fieldCmp;
     public DatePicker pickerHireDate;
     public DatePicker pickerExpireDate;
     public ChoiceBox<Job> choiceJob;
     public ObservableList<Job> jobs= FXCollections.observableArrayList();
+    public ChoiceBox<Department> choiceDepartment;
+    public ObservableList<Department> departments= FXCollections.observableArrayList();
     private Employee employee;
     @FXML
     private ImageView imgView;
@@ -38,31 +39,34 @@ public class EmployeeController {
     public EmployeeController() {
     }
 
-    public EmployeeController(Employee employee, ArrayList<Job> jobs) {
+    public EmployeeController(Employee employee, ArrayList<Job> jobs,ArrayList<Department> departments) {
         this.employee = employee;
         this.jobs = FXCollections.observableArrayList(jobs);
+        this.departments=FXCollections.observableArrayList(departments);
     }
 
     @FXML
     public void initialize() {
         choiceJob.setItems(jobs);
-      if (employee != null) {
-          fieldEmployeeName.setText(employee.getEmployeeName());
-          fieldEmail.setText(employee.getEmail());
-          if (employee instanceof Worker)
-          fieldManager.setText(((Worker) employee).getManager().getEmployeeName());
-          for (Job job : jobs)
-              if (job.getJobId() == employee.getJobId())
-                  choiceJob.getSelectionModel().select(job);
-          fieldDepartment.setText(Integer.toString(employee.getDepartmentId()));
-          fieldSalary.setText(Integer.toString(employee.getSalary()));
-          pickerHireDate.setValue(employee.getHireDate());
-          pickerExpireDate.setValue(employee.getExpireDate());
-          fieldCmp.setText(Double.toString(employee.getCmp()));
-      }
-      else {
-          choiceJob.getSelectionModel().selectFirst();
-      }
+        if (employee != null) {
+            fieldEmployeeName.setText(employee.getEmployeeName());
+            fieldEmail.setText(employee.getEmail());
+            if (employee instanceof Worker)
+                fieldManager.setText(((Worker) employee).getManager().getEmployeeName());
+            for (Job job : jobs)
+                if (job.getJobTitle() == employee.getJob().getJobTitle())
+                    choiceJob.getSelectionModel().select(job);
+            for (Department dep : departments)
+                if (dep.getDepartmentName() == employee.getDepartment().getDepartmentName())
+                    choiceDepartment.getSelectionModel().select(dep);
+            fieldSalary.setText(Integer.toString(employee.getSalary()));
+            pickerHireDate.setValue(employee.getHireDate());
+            pickerExpireDate.setValue(employee.getExpireDate());
+            fieldCmp.setText(Double.toString(employee.getCmp()));
+        }
+        else {
+            choiceJob.getSelectionModel().selectFirst();
+        }
         fieldEmployeeName.textProperty().addListener((obs, oldName, newName) -> {
 
             if (!newName.isEmpty() && ValidateEmployeeName(newName) ) {
@@ -106,7 +110,7 @@ public class EmployeeController {
         imgView.setImage(
                 new Image("images/application-exit.png")
         );
-  }
+    }
 
     private boolean ValidateCmp(String newValue) {
         for (int i=1;i<newValue.length();i++)
@@ -117,13 +121,13 @@ public class EmployeeController {
         } catch (NumberFormatException e) {
             // ...
         }
-       if (cmp<0) return false;
-       else return true;
+        if (cmp<0) return false;
+        else return true;
     }
 
     private boolean ValidateSalary(String newValue) {
         for (int i=1;i<newValue.length();i++)
-        if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in salary textfield
+            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in salary textfield
         int salary = 0;
         try {
             salary = Integer.parseInt(fieldSalary.getText());
@@ -136,7 +140,7 @@ public class EmployeeController {
 
 
     private boolean ValidateEmployeeName(String newName) {
-        if (newName.length()>35 || newName.length()<=3) return false;
+        if (newName.length()>35) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 
         for (int i=1;i<newName.length();i++) {
@@ -164,6 +168,11 @@ public class EmployeeController {
         stage.close();
     }
     public void AddNewJob (ActionEvent actionEvent) {
+        employee = null;
+        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
+        stage.close();
+    }
+    public void AddNewDepartment (ActionEvent actionEvent) {
         employee = null;
         Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
@@ -235,8 +244,8 @@ public class EmployeeController {
         employee.setEmail(fieldEmail.getText());
         employee.setCmp(Double.parseDouble(fieldCmp.getText()));
         employee.setSalary(Integer.parseInt(fieldSalary.getText()));
-        employee.setDepartmentId(Integer.parseInt(fieldDepartment.getText()));
-        employee.setJobId(choiceJob.getValue().getJobId());
+        employee.setDepartment(choiceDepartment.getSelectionModel().getSelectedItem());
+        employee.setJob(choiceJob.getSelectionModel().getSelectedItem());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String hireDate = formatter.format(employee.getHireDate());
         employee.setHireDate(hireDate);

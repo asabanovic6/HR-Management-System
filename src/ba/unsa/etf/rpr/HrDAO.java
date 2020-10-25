@@ -13,8 +13,8 @@ public class HrDAO {
     private Connection conn;
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
             getDepartmentsPS,getDepartmentsOnLocationPS,getLocationsPS,getLocationPS,getJobsPS,searchEmployeePS,deleteWorkerPS,
-    searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
-    getJobPS,editEmployeePS;
+            searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
+            getJobPS,editEmployeePS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -136,7 +136,7 @@ public class HrDAO {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String hireDate = formatter.format(employee.getHireDate());
             addEmployeePS.setString(4,hireDate);
-            addEmployeePS.setInt(5,employee.getDepartmentId());
+            addEmployeePS.setInt(5,employee.getDepartment().getDepartmentId());
             addEmployeePS.setInt(6,0);
             addEmployeePS.setInt(7,1);
             addEmployeePS.setInt(8,employee.getSalary());
@@ -164,9 +164,9 @@ public class HrDAO {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String hireDate = formatter.format(employee.getHireDate());
             addEmployeePS.setString(4,hireDate);
-            addEmployeePS.setInt(5,employee.getDepartmentId());
+            addEmployeePS.setInt(5,employee.getDepartment().getDepartmentId());
             addEmployeePS.setInt(6,employee.getManager().getEmployeeId());
-            addEmployeePS.setInt(7,employee.getJobId());
+            addEmployeePS.setInt(7,employee.getJob().getJobId());
             addEmployeePS.setInt(8,employee.getSalary());
             addEmployeePS.setDouble(9,employee.getCmp());
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -245,7 +245,7 @@ public class HrDAO {
             e.printStackTrace();
         }
     }
-   public void deleteManager (String managerName) throws SQLException {
+    public void deleteManager (String managerName) throws SQLException {
         searchEmployeePS.setString(1, managerName);
         ResultSet rs = searchEmployeePS.executeQuery();
         if (!rs.next()) return;
@@ -257,7 +257,7 @@ public class HrDAO {
             deleteManagerPS.executeUpdate();
         }
         else {
-           workers.forEach(worker->worker.setManager(null));
+            workers.forEach(worker->worker.setManager(null));
         }
 
     }
@@ -326,9 +326,9 @@ public class HrDAO {
         if (!doesDepartmentExist(departmentId)) throw new NonExistentDepartment("This department doesn't exist!");
         Manager manager = new Manager();
         try {
-                getManagerFromDepartmentPS.setInt(1, departmentId);
-                ResultSet rs = getManagerFromDepartmentPS.executeQuery();
-                manager = getManagerFromResultSet(rs);
+            getManagerFromDepartmentPS.setInt(1, departmentId);
+            ResultSet rs = getManagerFromDepartmentPS.executeQuery();
+            manager = getManagerFromResultSet(rs);
 
         } catch (SQLException  e) {
             e.printStackTrace();
@@ -408,7 +408,7 @@ public class HrDAO {
             getEmployeePS.setInt(1, id);
             ResultSet rs = getEmployeePS.executeQuery();
             if (!rs.next()) return null;
-           return getEmployeeFromResultSet(rs);
+            return getEmployeeFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -427,7 +427,7 @@ public class HrDAO {
             return null;
         }
     }
-    private Department getDepartment (int id) {
+    public Department getDepartment (int id) {
         try {
             getDepartmentPS.setInt(1, id);
             ResultSet rs = getDepartmentPS.executeQuery();
@@ -450,19 +450,21 @@ public class HrDAO {
         }
     }
     private Employee getEmployeeFromResultSet(ResultSet rs) throws SQLException {
+        Department dep = getDepartment(rs.getInt(5));
+        Job job = getJob(rs.getInt(7));
         if (rs.getInt(6) == 0) {
-
-            return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), rs.getInt(6));
+            return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10), rs.getInt(6));
         }else {
 
             Manager manager = getManager(rs.getInt(6));
-            return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10), manager);
+            return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10), manager);
         }
     }
 
     private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
-
-        return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(7), rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
+        Department dep = getDepartment(rs.getInt(5));
+        Job job = getJob(rs.getInt(7));
+        return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
     }
 
     private Department getDepartmentFromResultSet ( ResultSet rs) throws SQLException {

@@ -8,8 +8,8 @@ public class Manager extends Employee {
     public Manager() {
     }
 
-    public Manager(int employeeId, String employeeName, String email, String hireDate, int departmentId, int job, int salary, double cmp, String expireDate, int managerId) {
-        super(employeeId, employeeName, email, hireDate, departmentId, job, salary, cmp, expireDate);
+    public Manager(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate, int managerId) {
+        super(employeeId, employeeName, email, hireDate, department, job, salary, cmp, expireDate);
         this.managerId = managerId;
     }
 

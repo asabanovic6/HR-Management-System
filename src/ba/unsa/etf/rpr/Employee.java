@@ -8,8 +8,8 @@ public class Employee {
     private String employeeName;
     private String email;
     private LocalDate hireDate;
-    private int departmentId;
-    private int jobId;
+    private Department department;
+    private Job job;
     private int Salary;
     private double cmp;
     private LocalDate expireDate;
@@ -18,7 +18,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String email, String hireDate, int departmentId, int job, int salary, double cmp, String expireDate) {
+    public Employee(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.hireDate = LocalDate.parse(hireDate, formatter);
@@ -26,8 +26,8 @@ public class Employee {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.email = email;
-        this.departmentId = departmentId;
-        this.jobId = job;
+        this.department = department;
+        this.job= job;
         Salary = salary;
         this.cmp = cmp;
 
@@ -71,20 +71,20 @@ public class Employee {
         this.hireDate = LocalDate.parse(hireDate, formatter);
     }
 
-    public int getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public int getJobId() {
-        return jobId;
+    public Job getJob() {
+        return job;
     }
 
-    public void setJobId(int job) {
-        this.jobId = job;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     public int getSalary() {

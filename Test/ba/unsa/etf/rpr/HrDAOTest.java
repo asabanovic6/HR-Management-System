@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,41 +21,41 @@ public class HrDAOTest {
     }
 
     @Test
-   public void regenerateFile() {
+    public void regenerateFile() {
 
-       HrDAO.removeInstance();
+        HrDAO.removeInstance();
         File dbfile = new File("baza.db");
         dbfile.delete();
         this.dao = HrDAO.getInstance();
         Employee emp = dao.getEmployee(1);
         assertEquals("Amina Sabanovic", emp.getEmployeeName());
     }
-   @Test
+    @Test
     public void test1Date () {
-       Employee emp = dao.getEmployee(1);
-       LocalDate date = LocalDate.of(2010, 10 , 05);
-       assertEquals(date, emp.getHireDate());
-   }
+        Employee emp = dao.getEmployee(1);
+        LocalDate date = LocalDate.of(2010, 10 , 05);
+        assertEquals(date, emp.getHireDate());
+    }
 
-   @Test
-   public void testGetManager () {
-       Manager man = dao.getManager(1);
-       assertEquals("Amina Sabanovic", man.getEmployeeName());
-   }
+    @Test
+    public void testGetManager () {
+        Manager man = dao.getManager(1);
+        assertEquals("Amina Sabanovic", man.getEmployeeName());
+    }
     @Test
     public void testGetManagerExceptionEdition () {
         AtomicReference<Manager> man = null;
-      assertThrows(NullPointerException.class,()-> man.set(dao.getManager(2)),"This employee is not manager!" );
+        assertThrows(NullPointerException.class,()-> man.set(dao.getManager(2)),"This employee is not manager!" );
     }
 
-   @Test
+    @Test
     public void testGetEmployeesFromDepartment () throws NonExistentDepartment {
 
-       ArrayList<Employee> employees = dao.getEmployeesFromDepartment(1);
-       assertEquals("Adnan Tomic ", employees.get(0).getEmployeeName());
-       assertEquals("Amina Sabanovic", employees.get(1).getEmployeeName());
-       assertEquals("Hana Veladzic", employees.get(2).getEmployeeName());
-   }
+        ArrayList<Employee> employees = dao.getEmployeesFromDepartment(1);
+        assertEquals("Adnan Tomic ", employees.get(0).getEmployeeName());
+        assertEquals("Amina Sabanovic", employees.get(1).getEmployeeName());
+        assertEquals("Hana Veladzic", employees.get(2).getEmployeeName());
+    }
 
     @Test
     public void testGetEmployeesFromDepartmentExceptionEdition () {
@@ -62,11 +63,11 @@ public class HrDAOTest {
         assertThrows(NonExistentDepartment.class,()-> emp.set(dao.getEmployeesFromDepartment(99)),"This department doesn't exist!");
     }
 
-   @Test
+    @Test
     public void testGetManagerFromDepartment () throws NonExistentDepartment {
         Manager manager = dao.getManagerFromDepartment(1);
         assertEquals("Amina Sabanovic", manager.getEmployeeName());
-   }
+    }
 
     @Test
     public void testGetManagerFromDepartmentExceptionEdition () {
@@ -159,10 +160,10 @@ public class HrDAOTest {
         worker.setCmp(0.1);
         worker.setSalary(1000);
 
-        worker.setJobId(2);
+        worker.setJob(dao.getJob(2));
         worker.setHireDate("2020-10-05");
         worker.setExpireDate("2030-10-05");
-        worker.setDepartmentId(2);
+        worker.setDepartment(dao.getDepartment(2));
 
         dao.addWorker(worker);
         ArrayList<Worker> workers = dao.getWorkersFromManager(4);
@@ -174,18 +175,19 @@ public class HrDAOTest {
     void testAddManager() throws NonExistentDepartment {
         Manager man = new Manager();
         man.setEmployeeName("Nijaz Šabanović");
-        man.setManagerId(0);
         man.setEmail("nSabanovic@gmail.com");
         man.setCmp(0.1);
         man.setSalary(1000);
-        man.setJobId(1);
+        Job job = dao.getJob(1);
+        man.setJob(job);
         man.setHireDate("2020-10-05");
         man.setExpireDate("2030-10-05");
-        man.setDepartmentId(3);
+        Department department = dao.getDepartment(3);
+        man.setDepartment(department);
         dao.addManager(man);
         Department dep = new Department();
         dep.setDepartmentName("Lounge");
-        dep.setManagerId(man.getManagerId());
+        dep.setManagerId(man.getEmployeeId());
         dep.setLocationId(1);
         dao.addDepartment(dep);
         Manager manager = dao.getManagerFromDepartment(3);
