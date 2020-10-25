@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
-import org.assertj.core.internal.bytebuddy.asm.Advice;
+
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -136,7 +136,7 @@ public class EmployeeController {
 
 
     private boolean ValidateEmployeeName(String newName) {
-        if (newName.length()>35) return false;
+        if (newName.length()>35 || newName.length()<=3) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 
         for (int i=1;i<newName.length();i++) {
