@@ -21,6 +21,13 @@ public class JobController {
     public JobController() {
     }
 
+    public JobController(Job job) {
+        this.job = job;
+    }
+    public Job getJob() {
+        return job;
+    }
+
     @FXML
     public void  initialize() {
        if (job!=null) {

@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,10 +15,13 @@ import javafx.stage.Stage;
 
 
 import java.awt.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class EmployeeController {
 
@@ -148,9 +154,28 @@ public class EmployeeController {
         stage.close();
     }
     public void AddNewJob (ActionEvent actionEvent) {
-        employee = null;
-        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
-        stage.close();
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/job.fxml"));
+            JobController jobController = new JobController(null);
+            loader.setController(jobController);
+            root = loader.load();
+            stage.setTitle("Posao");
+            stage.setScene(new Scene(root, 400, 265));
+            stage.setResizable(true);
+            stage.show();
+
+            /*stage.setOnHiding( event -> {
+                Job job = jobController.getJob();
+                if (job != null) {
+                    dao.addJob(job);
+                    listGradovi.setAll(dao.gradovi());
+                }
+            } ); */
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void AddNewDepartment (ActionEvent actionEvent) {
         employee = null;
