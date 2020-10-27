@@ -4,13 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 
 
 import java.awt.*;
@@ -24,7 +22,7 @@ public class EmployeeController {
     public TextField fieldEmployeeName;
     public TextField fieldEmail;
     public TextField fieldManager;
-    public TextField fieldSalary;
+    public Slider sliderSalary;
     public TextField fieldCmp;
     public DatePicker pickerHireDate;
     public DatePicker pickerExpireDate;
@@ -59,7 +57,9 @@ public class EmployeeController {
             for (Department dep : departments)
                 if (dep.getDepartmentName() == employee.getDepartment().getDepartmentName())
                     choiceDepartment.getSelectionModel().select(dep);
-            fieldSalary.setText(Integer.toString(employee.getSalary()));
+            sliderSalary.setMin(choiceJob.getSelectionModel().getSelectedItem().getMinSalary());
+            sliderSalary.setMax(choiceJob.getSelectionModel().getSelectedItem().getMaxSalary());
+
             pickerHireDate.setValue(employee.getHireDate());
             pickerExpireDate.setValue(employee.getExpireDate());
             fieldCmp.setText(Double.toString(employee.getCmp()));
@@ -87,16 +87,7 @@ public class EmployeeController {
                 fieldEmail.getStyleClass().add("poljeNijeIspravno");
             }
         });
-        fieldSalary.textProperty().addListener((obs, oldValue, newValue) -> {
 
-            if (!newValue.isEmpty() && ValidateSalary(newValue) ) {
-                fieldSalary.getStyleClass().removeAll("poljeNijeIspravno");
-                fieldSalary.getStyleClass().add("poljeIspravno");
-            } else {
-                fieldSalary.getStyleClass().removeAll("poljeIspravno");
-                fieldSalary.getStyleClass().add("poljeNijeIspravno");
-            }
-        });
         fieldCmp.textProperty().addListener((obs, oldValue, newValue) -> {
 
             if (!newValue.isEmpty() && ValidateCmp(newValue) ) {
@@ -125,18 +116,7 @@ public class EmployeeController {
         else return true;
     }
 
-    private boolean ValidateSalary(String newValue) {
-        for (int i=1;i<newValue.length();i++)
-            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in salary textfield
-        int salary = 0;
-        try {
-            salary = Integer.parseInt(fieldSalary.getText());
-        } catch (NumberFormatException e) {
-            // ...
-        }
-        if(salary<=0) return false;
-        else return true;
-    }
+
 
 
     private boolean ValidateEmployeeName(String newName) {
@@ -207,20 +187,6 @@ public class EmployeeController {
         }
 
 
-        int salary = 0;
-        try {
-            salary = Integer.parseInt(fieldSalary.getText());
-        } catch (NumberFormatException e) {
-            // ...
-        }
-        if (salary <= 0) {
-            fieldSalary.getStyleClass().removeAll("poljeIspravno");
-            fieldSalary.getStyleClass().add("poljeNijeIspravno");
-            Ok = false;
-        } else {
-            fieldSalary.getStyleClass().removeAll("poljeNijeIspravno");
-            fieldSalary.getStyleClass().add("poljeIspravno");
-        }
 
         double cmp = 0;
         try {
@@ -243,7 +209,7 @@ public class EmployeeController {
         employee.setEmployeeName(fieldEmployeeName.getText());
         employee.setEmail(fieldEmail.getText());
         employee.setCmp(Double.parseDouble(fieldCmp.getText()));
-        employee.setSalary(Integer.parseInt(fieldSalary.getText()));
+        employee.setSalary((int) sliderSalary.getValue());
         employee.setDepartment(choiceDepartment.getSelectionModel().getSelectedItem());
         employee.setJob(choiceJob.getSelectionModel().getSelectedItem());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

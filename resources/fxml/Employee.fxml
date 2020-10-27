@@ -84,10 +84,10 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </GridPane.margin></TextField>
-      <TextField fx:id="fieldSalary" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <Slider fx:id="SliderSalary" majorTickUnit="10.0" max="1000.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </GridPane.margin></TextField>
+         </GridPane.margin></Slider>
       <TextField fx:id="fieldCmp" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
