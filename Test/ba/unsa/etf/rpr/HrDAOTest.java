@@ -103,11 +103,11 @@ public class HrDAOTest {
 
     @Test
     public void testGetJobs () {
-        ArrayList<Job> jobs= dao.getJobs();
-        assertEquals("Menadžer", jobs.get(0).getJobTitle());
-        assertEquals("Kuhar", jobs.get(1).getJobTitle());
-        assertEquals("Šanker", jobs.get(2).getJobTitle());
-        assertEquals("Čistać", jobs.get(3).getJobTitle());
+        ArrayList<String> jobs= dao.getJobs();
+        assertEquals("Menadžer", jobs.get(0));
+        assertEquals("Kuhar", jobs.get(1));
+        assertEquals("Šanker", jobs.get(2));
+        assertEquals("Čistać", jobs.get(3));
     }
     @Test
     public void testDeleteEmployee () throws NonExistentDepartment {
@@ -125,8 +125,8 @@ public class HrDAOTest {
         job.setMaxSalary(1500);
         dao.addJob(job);
 
-        ArrayList<Job> jobs = dao.getJobs();
-        assertEquals("Ekonomista", jobs.get(4).getJobTitle());
+        ArrayList<String> jobs = dao.getJobs();
+        assertEquals("Ekonomista", jobs.get(4));
     }
     @Test
     void testAddDepartment() {

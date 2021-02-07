@@ -32,18 +32,22 @@ public class EmployeeController {
     public TextField fieldCmp;
     public DatePicker pickerHireDate;
     public DatePicker pickerExpireDate;
-    public ChoiceBox<Job> choiceJob;
-    public ObservableList<Job> jobs= FXCollections.observableArrayList();
-    public ChoiceBox<Department> choiceDepartment;
-    public ObservableList<Department> departments= FXCollections.observableArrayList();
+    public ChoiceBox<String> choiceJob;
+    public ObservableList<String> jobs= FXCollections.observableArrayList();
+    public ChoiceBox<String> choiceDepartment;
+    public ObservableList<String> departments= FXCollections.observableArrayList();
     private Employee employee;
+    private HrDAO dao;
     @FXML
     private ImageView imgView;
 
     public EmployeeController() {
+        dao = HrDAO.getInstance();
+        jobs = FXCollections.observableArrayList(dao.getJobs());
+        departments = FXCollections.observableArrayList(dao.getDepartmentsByNames());
     }
 
-    public EmployeeController(Employee employee, ArrayList<Job> jobs,ArrayList<Department> departments) {
+    public EmployeeController(Employee employee, ArrayList<String> jobs,ArrayList<String> departments) {
         this.employee = employee;
         this.jobs = FXCollections.observableArrayList(jobs);
         this.departments=FXCollections.observableArrayList(departments);
@@ -52,19 +56,20 @@ public class EmployeeController {
     @FXML
     public void initialize() {
         choiceJob.setItems(jobs);
+        choiceDepartment.setItems(departments);
         if (employee != null) {
             fieldEmployeeName.setText(employee.getEmployeeName());
             fieldEmail.setText(employee.getEmail());
             if (employee instanceof Worker)
                 fieldManager.setText(((Worker) employee).getManager().getEmployeeName());
-            for (Job job : jobs)
-                if (job.getJobTitle() == employee.getJob().getJobTitle())
+            for (String job : jobs)
+                if (job == employee.getJob().getJobTitle())
                     choiceJob.getSelectionModel().select(job);
-            for (Department dep : departments)
-                if (dep.getDepartmentName() == employee.getDepartment().getDepartmentName())
+            for (String dep : departments)
+                if (dep == employee.getDepartment().getDepartmentName())
                     choiceDepartment.getSelectionModel().select(dep);
-            sliderSalary.setMin(choiceJob.getSelectionModel().getSelectedItem().getMinSalary());
-            sliderSalary.setMax(choiceJob.getSelectionModel().getSelectedItem().getMaxSalary());
+            sliderSalary.setMin(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMinSalary());
+            sliderSalary.setMax(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMaxSalary());
 
             pickerHireDate.setValue(employee.getHireDate());
             pickerExpireDate.setValue(employee.getExpireDate());
@@ -72,6 +77,7 @@ public class EmployeeController {
         }
         else {
             choiceJob.getSelectionModel().selectFirst();
+            choiceDepartment.getSelectionModel().selectFirst();
         }
         fieldEmployeeName.textProperty().addListener((obs, oldName, newName) -> {
 
@@ -161,26 +167,45 @@ public class EmployeeController {
             JobController jobController = new JobController(null);
             loader.setController(jobController);
             root = loader.load();
-            stage.setTitle("Posao");
+            stage.setTitle("Dodaj novi posao u listu poslova");
             stage.setScene(new Scene(root, 400, 265));
             stage.setResizable(true);
             stage.show();
 
-            /*stage.setOnHiding( event -> {
+            stage.setOnHiding( event -> {
                 Job job = jobController.getJob();
                 if (job != null) {
                     dao.addJob(job);
-                    listGradovi.setAll(dao.gradovi());
+                    choiceDepartment.setItems(FXCollections.observableArrayList(dao.getJobs()));
                 }
-            } ); */
+            } );
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void AddNewDepartment (ActionEvent actionEvent) {
-        employee = null;
-        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
-        stage.close();
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/department.fxml"));
+            DepartmentController departmentController = new DepartmentController(null);
+            loader.setController(departmentController);
+            root = loader.load();
+            stage.setTitle("Dodaj novi odjel u listu odjela");
+            stage.setScene(new Scene(root, 400, 265));
+            stage.setResizable(true);
+            stage.show();
+
+            stage.setOnHiding( event -> {
+                Department dep = departmentController.getDepartment();
+                if (dep != null) {
+                    dao.addDepartment(dep);
+                    choiceDepartment.setItems(FXCollections.observableArrayList(dao.getDepartmentsByNames()));
+                }
+            } );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void clickOk(ActionEvent actionEvent) {
         boolean Ok = true;
@@ -235,8 +260,8 @@ public class EmployeeController {
         employee.setEmail(fieldEmail.getText());
         employee.setCmp(Double.parseDouble(fieldCmp.getText()));
         employee.setSalary((int) sliderSalary.getValue());
-        employee.setDepartment(choiceDepartment.getSelectionModel().getSelectedItem());
-        employee.setJob(choiceJob.getSelectionModel().getSelectedItem());
+        employee.setDepartment(dao.getDepartmentByName(choiceDepartment.getSelectionModel().getSelectedItem()));
+        employee.setJob(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String hireDate = formatter.format(employee.getHireDate());
         employee.setHireDate(hireDate);

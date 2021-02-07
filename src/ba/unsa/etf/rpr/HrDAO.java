@@ -14,7 +14,7 @@ public class HrDAO {
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
             getDepartmentsPS,getDepartmentsOnLocationPS,getLocationsPS,getLocationPS,getJobsPS,searchEmployeePS,deleteWorkerPS,
             searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
-            getJobPS,editEmployeePS;
+            getJobPS,editEmployeePS,getJobbyNamePS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -45,14 +45,18 @@ public class HrDAO {
             getManagerFromDepartmentPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=0 AND department_id=?");
             getWorkersFromManagerPS = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=? ORDER BY employee_name");
             getDepartmentsPS = conn.prepareStatement("SELECT * FROM departments");
+
             getDepartmentPS=conn.prepareStatement("SELECT * FROM departments WHERE department_id=?");
+           getDepartmentbyNamePS =conn.prepareStatement("SELECT * FROM departments WHERE department_name=?");
             getDepartmentsOnLocationPS = conn.prepareStatement("SELECT * FROM departments WHERE location_id=?");
             getLocationsPS= conn.prepareStatement("SELECT * FROM locations");
             getLocationPS=conn.prepareStatement("SELECT * FROM locations WHERE location_id=?");
             getJobPS = conn.prepareStatement("SELECT * FROM jobs WHERE job_id=?");
             getJobsPS = conn.prepareStatement("SELECT * FROM jobs");
-
+            getJobbyNamePS = conn.prepareStatement("SELECT * FROM jobs WHERE job_title=?");
+            getManagersPs = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=0 ");
             searchEmployeePS = conn.prepareStatement("SELECT * FROM employees WHERE employee_name=?");
+            searchLocationsPS = conn.prepareStatement("SELECT * FROM locations WHERE city=?");
             searchDepartmentPS = conn.prepareStatement("SELECT * FROM departments WHERE department_name=?");
 
             deleteWorkerPS = conn.prepareStatement("DELETE FROM employees WHERE employee_id=?");
@@ -366,6 +370,19 @@ public class HrDAO {
         }
         return result;
     }
+    public ArrayList<String> getDepartmentsByNames() {
+        ArrayList<String> result = new ArrayList();
+        try {
+            ResultSet rs = getDepartmentsPS.executeQuery();
+            while (rs.next()) {
+                String dep = getDepartmentNameFromResultSet(rs);
+                result.add(dep);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     public ArrayList<Location> getLocations() {
         ArrayList<Location> result = new ArrayList();
         try {
@@ -379,12 +396,38 @@ public class HrDAO {
         }
         return result;
     }
-    public ArrayList<Job> getJobs() {
-        ArrayList<Job> result = new ArrayList();
+    public ArrayList<String> getLocationsName() {
+        ArrayList<String> result = new ArrayList();
+        try {
+            ResultSet rs = getLocationsPS.executeQuery();
+            while (rs.next()) {
+                Location loc = getLocationFromResultSet(rs);
+                result.add(loc.getCity());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public ArrayList<String> getManagers() {
+        ArrayList<String> result = new ArrayList();
+        try {
+            ResultSet rs = getManagersPs.executeQuery();
+            while (rs.next()) {
+                Manager manager = getManagerFromResultSet(rs);
+                result.add(manager.getEmployeeName());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public ArrayList<String> getJobs() {
+        ArrayList<String> result = new ArrayList();
         try {
             ResultSet rs = getJobsPS.executeQuery();
             while (rs.next()) {
-                Job job = getJobFromResultSet(rs);
+                String job = getJobsNameFromResultSet(rs);
                 result.add(job);
             }
         } catch (SQLException e) {
@@ -392,10 +435,22 @@ public class HrDAO {
         }
         return result;
     }
+
     public Job getJob(int id) {
         try {
             getJobPS.setInt(1, id);
             ResultSet rs = getJobPS.executeQuery();
+            if (!rs.next()) return null;
+            return getJobFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Job getJobbyName(String name) {
+        try {
+            getJobbyNamePS.setString(1, name);
+            ResultSet rs = getJobbyNamePS.executeQuery();
             if (!rs.next()) return null;
             return getJobFromResultSet(rs);
         } catch (SQLException e) {
@@ -414,7 +469,28 @@ public class HrDAO {
             return null;
         }
     }
-
+    public Employee searchEmployeeByName (String  name) {
+        try {
+            searchEmployeePS.setString(1, name);
+            ResultSet rs = searchEmployeePS.executeQuery();
+            if (!rs.next()) return null;
+            return getEmployeeFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Location searchLocationsByName (String  name) {
+        try {
+            searchLocationsPS.setString(1, name);
+            ResultSet rs = searchLocationsPS.executeQuery();
+            if (!rs.next()) return null;
+            return getLocationFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public Manager getManager (int id) {
         try {
             getEmployeePS.setInt(1, id);
@@ -427,6 +503,7 @@ public class HrDAO {
             return null;
         }
     }
+
     public Department getDepartment (int id) {
         try {
             getDepartmentPS.setInt(1, id);
@@ -438,7 +515,18 @@ public class HrDAO {
             return null;
         }
     }
-    private Location getLocation (int id) {
+    public Department getDepartmentByName (String name) {
+        try {
+            getDepartmentbyNamePS.setString(1, name);
+            ResultSet rs = getDepartmentPS.executeQuery();
+            if (!rs.next()) return null;
+            return getDepartmentFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Location getLocation (int id) {
         try {
             getLocationPS.setInt(1, id);
             ResultSet rs = getLocationPS.executeQuery();
@@ -470,13 +558,20 @@ public class HrDAO {
     private Department getDepartmentFromResultSet ( ResultSet rs) throws SQLException {
         return new Department(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
     }
-
+    private String getDepartmentNameFromResultSet ( ResultSet rs) throws SQLException {
+        Department d=  new Department(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+        return d.getDepartmentName();
+    }
     private Location getLocationFromResultSet ( ResultSet rs) throws SQLException {
         return new Location (rs.getInt(1),rs.getString(2));
     }
 
     private Job getJobFromResultSet ( ResultSet rs) throws SQLException {
         return  new Job (rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+    }
+    private String getJobsNameFromResultSet ( ResultSet rs) throws SQLException {
+        Job j=  new Job (rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+        return j.getJobTitle();
     }
 
 

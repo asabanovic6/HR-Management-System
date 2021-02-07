@@ -107,6 +107,7 @@ public class JobController {
         if (salary<=0 ) return false;
         else return true;
     }
+
     public void clickCancel(ActionEvent actionEvent) {
         job = null;
         Stage stage = (Stage) fieldJobTitle.getScene().getWindow();
@@ -139,7 +140,7 @@ public class JobController {
         }
         int salaryMax = 0;
         try {
-            salaryMin= Integer.parseInt(fieldMaxSalary.getText());
+            salaryMax= Integer.parseInt(fieldMaxSalary.getText());
         } catch (NumberFormatException e) {
             // ...
         }
@@ -154,10 +155,10 @@ public class JobController {
 
         if (!Ok) return;
 
-        if (job==null) job = new Job();
-        job.setJobTitle(fieldJobTitle.getText());
-        job.setMinSalary(Integer.parseInt(fieldMinSalary.getText()));
-        job.setMaxSalary(Integer.parseInt(fieldMaxSalary.getText()));
+        if (job==null) this.job = new Job();
+        this.job.setJobTitle(fieldJobTitle.getText());
+       this.job.setMinSalary(Integer.parseInt(fieldMinSalary.getText()));
+        this.job.setMaxSalary(Integer.parseInt(fieldMaxSalary.getText()));
         Stage stage = (Stage) fieldJobTitle.getScene().getWindow();
         stage.close();
     }
