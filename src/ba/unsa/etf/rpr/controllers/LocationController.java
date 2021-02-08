@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.utilities.HrDAO;
-import ba.unsa.etf.rpr.utilities.Location;
+import ba.unsa.etf.rpr.model.Location;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

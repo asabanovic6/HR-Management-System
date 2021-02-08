@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.model.Department;
+import ba.unsa.etf.rpr.model.Employee;
+import ba.unsa.etf.rpr.model.Job;
+import ba.unsa.etf.rpr.model.Worker;
 import ba.unsa.etf.rpr.utilities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

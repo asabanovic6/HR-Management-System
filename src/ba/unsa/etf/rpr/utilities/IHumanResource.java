@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr.utilities;
 
+import ba.unsa.etf.rpr.exception.NonExistentDepartment;
+import ba.unsa.etf.rpr.exception.NonExistentLocation;
+import ba.unsa.etf.rpr.model.*;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 

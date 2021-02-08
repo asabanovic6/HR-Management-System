@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.utilities;
+package ba.unsa.etf.rpr.model;
 
 public class Job {
     private int jobId;

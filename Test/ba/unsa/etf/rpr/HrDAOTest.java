@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.exception.NonExistentDepartment;
+import ba.unsa.etf.rpr.exception.NonExistentLocation;
+import ba.unsa.etf.rpr.model.*;
 import ba.unsa.etf.rpr.utilities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,6 @@
-package ba.unsa.etf.rpr.utilities;
+package ba.unsa.etf.rpr.model;
+
+import ba.unsa.etf.rpr.enums.TypeOfEmployment;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

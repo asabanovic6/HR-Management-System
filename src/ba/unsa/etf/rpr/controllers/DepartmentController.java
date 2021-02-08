@@ -1,8 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.utilities.Department;
+import ba.unsa.etf.rpr.model.Department;
 import ba.unsa.etf.rpr.utilities.HrDAO;
-import ba.unsa.etf.rpr.utilities.Location;
+import ba.unsa.etf.rpr.model.Location;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

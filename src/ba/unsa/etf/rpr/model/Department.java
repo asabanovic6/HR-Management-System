@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.utilities;
+package ba.unsa.etf.rpr.model;
 
 import java.util.Objects;
 
