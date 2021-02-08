@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="GridJob" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@/css/location.css" />
+    </stylesheets>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.40000762939454" minWidth="5.0" prefWidth="102.4" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.4" minWidth="7.0" prefWidth="208.4" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="112.4" minHeight="10.0" prefHeight="112.4" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="82.4" minHeight="10.0" prefHeight="64.4" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <HBox prefHeight="51.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <children>
+                <Button fx:id="BtnOk" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#clickOk" prefHeight="30.0" prefWidth="100.0" text="Ok">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="BtnCancel" cancelButton="true" mnemonicParsing="false" onAction="#clickCancel" prefHeight="30.0" prefWidth="100.0">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="5.0" top="5.0" />
+                    </HBox.margin>
+                    <graphic>
+                        <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                    </graphic>
+                </Button>
+            </children></HBox>
+        <Label fx:id="Label1" text="Naziv lokacije: ">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+            </GridPane.margin>
+        </Label>
+        <TextField fx:id="fieldCity" GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+            </GridPane.margin></TextField>
+    </children>
+</GridPane>

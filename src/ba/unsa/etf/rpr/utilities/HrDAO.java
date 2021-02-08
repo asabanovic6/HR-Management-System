@@ -1,14 +1,13 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.utilities;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HrDAO {
+public class HrDAO implements  IHumanResource{
     private static HrDAO instance;
     private Connection conn;
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
@@ -122,7 +121,7 @@ public class HrDAO {
         }
         ArrayList<Employee> employees = getEmployeesFromDepartment(department.getDepartmentId());
         for (Employee e:employees) {
-            if (e instanceof  Worker) ((Worker) e).setManager(employee);
+            if (e instanceof Worker) ((Worker) e).setManager(employee);
         }
     }
 
@@ -480,6 +479,17 @@ public class HrDAO {
             return null;
         }
     }
+    public Department searchDepartmentbyName(String name) {
+        try {
+            searchDepartmentPS.setString(1, name);
+            ResultSet rs = searchDepartmentPS.executeQuery();
+            if (!rs.next()) return null;
+            return getDepartmentFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public Location searchLocationsByName (String  name) {
         try {
             searchLocationsPS.setString(1, name);
@@ -625,6 +635,7 @@ public class HrDAO {
         stmt.executeUpdate("DELETE FROM locations");
         regenerateDataBase();
     }
+
 
 
 }

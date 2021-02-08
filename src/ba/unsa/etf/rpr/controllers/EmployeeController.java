@@ -1,5 +1,6 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.utilities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,14 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class EmployeeController {
 

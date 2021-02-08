@@ -1,8 +1,8 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.utilities.Job;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

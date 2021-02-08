@@ -6,13 +6,14 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="GridDepartment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="GridDepartment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/department.css" />
     </stylesheets>
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="150.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="7.0" prefWidth="330.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.4" minWidth="5.0" prefWidth="114.4" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.4" minWidth="7.0" prefWidth="195.80000000000004" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.39999999999995" minWidth="10.0" prefWidth="123.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -58,5 +59,6 @@
             </GridPane.margin></TextField>
       <ChoiceBox fx:id="choiceManager" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <ChoiceBox fx:id="choiceLocation" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Button fx:id="BtnAddLocation" mnemonicParsing="false" onAction="#addLocation" text="Dodaj novu lokaciju" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
     </children>
 </GridPane>

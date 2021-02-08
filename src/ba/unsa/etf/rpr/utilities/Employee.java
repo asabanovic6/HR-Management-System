@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.utilities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

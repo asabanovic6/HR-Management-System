@@ -1,9 +1,16 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.utilities.Department;
+import ba.unsa.etf.rpr.utilities.HrDAO;
+import ba.unsa.etf.rpr.utilities.Location;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-import java.awt.*;
+import java.io.IOException;
 
 public class DepartmentController {
     public TextField fieldDepName;
@@ -84,31 +91,64 @@ public class DepartmentController {
         }
         return true;
     }
+    public void addLocation (ActionEvent actionEvent){
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/location.fxml"));
+            LocationController locationController = new LocationController(null);
+            loader.setController(locationController);
+            root = loader.load();
+            stage.setTitle("Dodaj novu lokaciju");
+            stage.setScene(new Scene(root, 400, 265));
+            stage.setResizable(true);
+            stage.show();
+
+            stage.setOnHiding( event -> {
+                Location loc = locationController.getLocation();
+                if (loc != null) {
+                    dao.addLocation(loc);
+                    choiceLocation.setItems(FXCollections.observableArrayList(dao.getLocationsName()));
+                }
+            } );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void clickCancel(ActionEvent actionEvent) {
         department = null;
         Stage stage = (Stage) fieldDepName.getScene().getWindow();
         stage.close();
     }
     public void clickOk(ActionEvent actionEvent) {
-        boolean Ok = true;
+        if (dao.searchDepartmentbyName(fieldDepName.getText()) != null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Neispravan odjel");
+            alert.setHeaderText("Nesipravan odjel");
+            alert.setContentText("Odjel  sa istim imenom već postoji!");
 
-        if (fieldDepName.getText().trim().isEmpty()) {
-            fieldDepName.getStyleClass().removeAll("poljeIspravno");
-            fieldDepName.getStyleClass().add("poljeNijeIspravno");
-            Ok = false;
+            alert.showAndWait();
         } else {
-            fieldDepName.getStyleClass().removeAll("poljeNijeIspravno");
-            fieldDepName.getStyleClass().add("poljeIspravno");
+            boolean Ok = true;
+
+            if (fieldDepName.getText().trim().isEmpty()) {
+                fieldDepName.getStyleClass().removeAll("poljeIspravno");
+                fieldDepName.getStyleClass().add("poljeNijeIspravno");
+                Ok = false;
+            } else {
+                fieldDepName.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldDepName.getStyleClass().add("poljeIspravno");
+            }
+
+            if (!Ok) return;
+
+            if (department == null) this.department = new Department();
+            this.department.setDepartmentName(fieldDepName.getText());
+            this.department.setManagerId(dao.searchEmployeeByName(choiceManager.getSelectionModel().getSelectedItem()).getEmployeeId());
+            this.department.setLocationId(dao.searchLocationsByName(choiceLocation.getSelectionModel().getSelectedItem()).getLocationId());
+            Stage stage = (Stage) fieldDepName.getScene().getWindow();
+            stage.close();
+
         }
-
-        if (!Ok) return;
-
-        if (department==null) this.department = new Department();
-        this.department.setDepartmentName(fieldDepName.getText());
-       this.department.setManagerId(dao.searchEmployeeByName(choiceManager.getSelectionModel().getSelectedItem()).getEmployeeId());
-        this.department.setLocationId(dao.searchLocationsByName(choiceLocation.getSelectionModel().getSelectedItem()).getLocationId());
-       Stage stage = (Stage) fieldDepName.getScene().getWindow();
-        stage.close();
-
     }
 }

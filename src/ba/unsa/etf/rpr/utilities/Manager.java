@@ -1,5 +1,9 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.utilities;
 
+
+import ba.unsa.etf.rpr.utilities.Department;
+import ba.unsa.etf.rpr.utilities.Employee;
+import ba.unsa.etf.rpr.utilities.Job;
 
 public class Manager extends Employee {
 

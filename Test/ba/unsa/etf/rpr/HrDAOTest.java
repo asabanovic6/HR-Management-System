@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import org.junit.jupiter.api.AfterAll;
+import ba.unsa.etf.rpr.utilities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
