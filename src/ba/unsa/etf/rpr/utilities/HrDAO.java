@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class HrDAO implements  IHumanResource{
@@ -17,7 +18,7 @@ public class HrDAO implements  IHumanResource{
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
             getDepartmentsPS,getDepartmentsOnLocationPS,getLocationsPS,getLocationPS,getJobsPS,searchEmployeePS,deleteWorkerPS,
             searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
-            getJobPS,editEmployeePS,getJobbyNamePS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS;
+            getJobPS,editEmployeePS,getJobbyNamePS,getEmployeeByEmailPS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS, getPasswordPS,getEmployeesPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -26,6 +27,7 @@ public class HrDAO implements  IHumanResource{
 
     private HrDAO () {
         try {
+
             conn= DriverManager.getConnection("jdbc:sqlite:baza.db");
         }
         catch (SQLException e) {
@@ -57,6 +59,9 @@ public class HrDAO implements  IHumanResource{
             getJobPS = conn.prepareStatement("SELECT * FROM jobs WHERE job_id=?");
             getJobsPS = conn.prepareStatement("SELECT * FROM jobs");
             getJobbyNamePS = conn.prepareStatement("SELECT * FROM jobs WHERE job_title=?");
+            getPasswordPS = conn.prepareStatement("SELECT password FROM employees WHERE email=?");
+            getEmployeesPS = conn.prepareStatement("SELECT * FROM employees");
+            getEmployeeByEmailPS = conn.prepareStatement("SELECT * FROM employees WHERE email=?");
             getManagersPs = conn.prepareStatement("SELECT * FROM employees WHERE manager_id=0 ");
             searchEmployeePS = conn.prepareStatement("SELECT * FROM employees WHERE employee_name=?");
             searchLocationsPS = conn.prepareStatement("SELECT * FROM locations WHERE city=?");
@@ -69,7 +74,7 @@ public class HrDAO implements  IHumanResource{
             addJobPS = conn.prepareStatement("INSERT INTO jobs VALUES(?,?,?,?)");
             addDepartmentPS = conn.prepareStatement("INSERT INTO departments VALUES(?,?,?,?)");
             addLocationPS = conn.prepareStatement("INSERT INTO locations VALUES(?,?)");
-            addEmployeePS = conn.prepareStatement("INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?)");
+            addEmployeePS = conn.prepareStatement("INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
             determineJobIdPS = conn.prepareStatement("SELECT MAX(job_id)+1 FROM jobs");
             determineDepartmentIdPS = conn.prepareStatement("SELECT MAX(department_id)+1 FROM departments");
@@ -119,6 +124,7 @@ public class HrDAO implements  IHumanResource{
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
+            addEmployeePS.setString(11,employee.getPassword());
             addEmployeePS.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,6 +157,7 @@ public class HrDAO implements  IHumanResource{
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
+            addEmployeePS.setString(11,employee.getPassword());
             addEmployeePS.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -179,6 +186,7 @@ public class HrDAO implements  IHumanResource{
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String expireDate = formatter1.format(employee.getExpireDate());
             addEmployeePS.setString(10,expireDate);
+            addEmployeePS.setString(11,employee.getPassword());
             addEmployeePS.executeUpdate();
 
         } catch (SQLException e) {
@@ -399,6 +407,20 @@ public class HrDAO implements  IHumanResource{
         }
         return result;
     }
+    public ArrayList<String> getEmails () {
+        ArrayList<String> result = new ArrayList();
+        try {
+            ResultSet rs = getEmployeesPS.executeQuery();
+            while (rs.next()) {
+                Employee emp = getEmployeeFromResultSet(rs);
+                result.add(emp.getEmail());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public ArrayList<String> getLocationsName() {
         ArrayList<String> result = new ArrayList();
         try {
@@ -439,6 +461,31 @@ public class HrDAO implements  IHumanResource{
         return result;
     }
 
+    @Override
+    public HashMap<String, String> getLogInData() {
+        HashMap<String, String> logs = new HashMap<>();
+        ArrayList<String> emails = new ArrayList<>();
+        emails = getEmails();
+        for (String email : emails) {
+            logs.put(email,getPassword(email));
+        }
+        return logs;
+    }
+
+    public String getPassword (String email ) {
+        try {
+            getPasswordPS.setString(1, email);
+            ResultSet rs = getPasswordPS.executeQuery();
+            if (!rs.next()) return null;
+            return getPasswordFromResultset(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
     public Job getJob(int id) {
         try {
             getJobPS.setInt(1, id);
@@ -465,6 +512,17 @@ public class HrDAO implements  IHumanResource{
         try {
             getEmployeePS.setInt(1, id);
             ResultSet rs = getEmployeePS.executeQuery();
+            if (!rs.next()) return null;
+            return getEmployeeFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Employee getEmployee(String email) {
+        try {
+            getEmployeeByEmailPS.setString(1, email);
+            ResultSet rs = getEmployeeByEmailPS.executeQuery();
             if (!rs.next()) return null;
             return getEmployeeFromResultSet(rs);
         } catch (SQLException e) {
@@ -555,18 +613,21 @@ public class HrDAO implements  IHumanResource{
         Department dep = getDepartment(rs.getInt(5));
         Job job = getJob(rs.getInt(7));
         if (rs.getInt(6) == 0) {
-            return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10), rs.getInt(6));
+            return new Manager(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getString(11), rs.getInt(6));
         }else {
 
             Manager manager = getManager(rs.getInt(6));
-            return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10), manager);
+            return new Worker(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getString(11), manager);
         }
+    }
+    private String getPasswordFromResultset(ResultSet rs) throws SQLException {
+   return rs.getString(1);
     }
 
     private Manager getManagerFromResultSet(ResultSet rs) throws SQLException {
         Department dep = getDepartment(rs.getInt(5));
         Job job = getJob(rs.getInt(7));
-        return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getInt(6));
+        return new Manager (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), dep, job, rs.getInt(8), rs.getDouble(9), rs.getString(10),rs.getString(11),rs.getInt(6));
     }
 
     private Department getDepartmentFromResultSet ( ResultSet rs) throws SQLException {

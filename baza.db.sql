@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS "employees" (
 	"salary"	INTEGER,
 	"cmp"	REAL,
 	"expire_date"	TEXT,
+	"password" TEXT,
 	PRIMARY KEY("employee_id"),
 	FOREIGN KEY("department_id") REFERENCES "departments"("department_id"),
 	FOREIGN KEY("job_id") REFERENCES "jobs"("job_id")
@@ -45,13 +46,12 @@ INSERT INTO "departments" VALUES (1,'Restoran',1,1);
 INSERT INTO "departments" VALUES (2,'Kafić',4,2);
 INSERT INTO "departments" VALUES (3,'Lounge',8,1);
 INSERT INTO "departments" VALUES (4,'Lounge',0,1);
-INSERT INTO "employees" VALUES (1,'Amina Sabanovic','asabanovi6@etf.unsa.ba','2010-10-05',1,0,1,1500,NULL,'2020-10-05');
-INSERT INTO "employees" VALUES (2,'Hana Veladzic','hanaveladzic@gmail.com','2011-10-10',1,1,2,1000,0.2,'2016-10-05');
-INSERT INTO "employees" VALUES (3,'Adnan Tomic ','adnant98@live.com','2011-09-18',1,1,3,1200,0.1,'2016-10-05');
-INSERT INTO "employees" VALUES (4,'Nina Skopljak','snina1@etf.unsa.ba','2015-03-11',2,0,1,1700,0.1,'2030-10-05');
-INSERT INTO "employees" VALUES (5,'Davor Sekulic','dsekulic3@etf.unsa.ba','2019-10-18',2,4,3,1300,NULL,'2025-10-05');
-INSERT INTO "employees" VALUES (6,'Sandra Zec','zecsandra1@gmail.com','2019-10-18',2,4,3,1300,0.1,'2025-10-05');
-INSERT INTO "employees" VALUES (7,'Mario Drmac','dmario1@gmail.com','2019-10-20',2,4,4,1000,NULL,'2025-10-05');
-INSERT INTO "employees" VALUES (8,'Nijaz Šabanović','nSabanovic@gmail.com','2020-10-05',3,0,1,1000,0.1,'2030-10-05');
-INSERT INTO "employees" VALUES (9,'Nijaz Šabanović','nSabanovic@gmail.com','2020-10-05',3,0,1,1000,0.1,'2030-10-05');
+INSERT INTO "employees" VALUES (1,'Amina Sabanovic','asabanovi6@etf.unsa.ba','2010-10-05',1,0,1,1500,NULL,'2020-10-05','password');
+INSERT INTO "employees" VALUES (2,'Hana Veladzic','hanaveladzic@gmail.com','2011-10-10',1,1,2,1000,0.2,'2016-10-05','password');
+INSERT INTO "employees" VALUES (3,'Adnan Tomic ','adnant98@live.com','2011-09-18',1,1,3,1200,0.1,'2016-10-05','password');
+INSERT INTO "employees" VALUES (4,'Nina Skopljak','snina1@etf.unsa.ba','2015-03-11',2,0,1,1700,0.1,'2030-10-05','password');
+INSERT INTO "employees" VALUES (5,'Davor Sekulic','dsekulic3@etf.unsa.ba','2019-10-18',2,4,3,1300,NULL,'2025-10-05','password');
+INSERT INTO "employees" VALUES (6,'Sandra Zec','zecsandra1@gmail.com','2019-10-18',2,4,3,1300,0.1,'2025-10-05','password');
+INSERT INTO "employees" VALUES (7,'Mario Drmac','dmario1@gmail.com','2019-10-20',2,4,4,1000,NULL,'2025-10-05','password');
+INSERT INTO "employees" VALUES (8,'Nijaz Šabanović','nSabanovic@gmail.com','2020-10-05',3,0,1,1000,0.1,'2030-10-05','password');
 COMMIT;

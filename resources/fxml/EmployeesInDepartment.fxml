@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <center>
+        <TableView fx:id="tableViewEmployees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="100.0" text="Ime i prezime" />
+                <TableColumn fx:id="colEmail" prefWidth="100.0" text="E-mail" />
+                <TableColumn fx:id="colDepartment" prefWidth="100.0" text="Odjel" />
+                <TableColumn fx:id="colJob" prefWidth="100.0" text="Posao" />
+                <TableColumn fx:id="colHireDate" prefWidth="100.0" text="Datum zaposlenja" />
+                <TableColumn fx:id="colExpireDate" prefWidth="100.0" text="Datum isteka ugovora" />
+                <TableColumn fx:id="colEmployment" prefWidth="100.0" text="Tip zaposlenja" />
+                <TableColumn fx:id="colSalary" prefWidth="100.0" text="Plata" />
+                <TableColumn fx:id="colCmp" prefWidth="100.0" text="Dodatak na platu" />
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <VBox prefHeight="400.0" prefWidth="163.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnAddEmployee" mnemonicParsing="false" onAction="#AddEmployee" prefWidth="Infinity" text="Dodaj novog zaposlenika" />
+                <Button fx:id="btnChangeEmployee" mnemonicParsing="false" onAction="#ChangeEmployee" prefWidth="Infinity" text="Izmjeni zaposlenika" />
+                <Button fx:id="btnChangeContrack" mnemonicParsing="false" onAction="#ChangeContrack" prefWidth="Infinity" text="Promijeni ugovor" />
+                <Button fx:id="btnResignFromWork" mnemonicParsing="false" onAction="#ResignFromWork" prefWidth="Infinity" text="Otkazi ugovor" />
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </VBox>
+    </right>
+</BorderPane>

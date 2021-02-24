@@ -167,7 +167,7 @@ public class HrDAOTest {
         worker.setHireDate("2020-10-05");
         worker.setExpireDate("2030-10-05");
         worker.setDepartment(dao.getDepartment(2));
-
+        worker.setPassword("password");
         dao.addWorker(worker);
         ArrayList<Worker> workers = dao.getWorkersFromManager(4);
         assertEquals("Senada Šabanović", workers.get(3).getEmployeeName());
@@ -187,6 +187,7 @@ public class HrDAOTest {
         man.setExpireDate("2030-10-05");
         Department department = dao.getDepartment(3);
         man.setDepartment(department);
+        man.setPassword("password");
         dao.addManager(man);
         Department dep = new Department();
         dep.setDepartmentName("Lounge");

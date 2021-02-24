@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.controllers.EmployeeController;
+import ba.unsa.etf.rpr.controllers.LogInController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +12,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Employee.fxml"));
-        EmployeeController ctrl = new EmployeeController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LogIn.fxml"));
+        LogInController ctrl = new LogInController();
         loader.setController(ctrl);
         Parent root = loader.load();
-        primaryStage.setTitle("Zaposleni");
-        primaryStage.setScene(new Scene(root, 500, 465));
+        primaryStage.setTitle("Prijavi se");
+        primaryStage.setScene(new Scene(root, 300, 180));
         primaryStage.show();
     }
 

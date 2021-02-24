@@ -12,8 +12,8 @@ public class Worker extends Employee {
     public Worker() {
     }
 
-    public Worker(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate, Manager manager) {
-        super(employeeId, employeeName, email, hireDate, department, job, salary, cmp, expireDate);
+    public Worker(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate,String password, Manager manager) {
+        super(employeeId, employeeName, email, hireDate, department, job, salary, cmp, expireDate,password);
         this.manager = manager;
     }
 

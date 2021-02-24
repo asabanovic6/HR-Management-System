@@ -95,7 +95,7 @@ public class DepartmentController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/location.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Location.fxml"));
             LocationController locationController = new LocationController(null);
             loader.setController(locationController);
             root = loader.load();

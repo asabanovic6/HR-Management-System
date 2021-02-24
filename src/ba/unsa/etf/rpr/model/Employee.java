@@ -16,11 +16,12 @@ public class Employee {
     private double cmp;
     private LocalDate expireDate;
     private TypeOfEmployment employment;
+    private String password;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate) {
+    public Employee(int employeeId, String employeeName, String email, String hireDate, Department department, Job job, int salary, double cmp, String expireDate,String password) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.hireDate = LocalDate.parse(hireDate, formatter);
@@ -38,6 +39,15 @@ public class Employee {
 
         if (expireDate!=null && expireDate!="") this.employment=TypeOfEmployment.PERMANENT;
         else this.employment=TypeOfEmployment.TEMPORARY;
+        this.password=password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getEmployeeId() {

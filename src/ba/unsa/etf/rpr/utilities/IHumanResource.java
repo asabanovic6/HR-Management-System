@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IHumanResource {
 
@@ -31,6 +32,7 @@ public interface IHumanResource {
     ArrayList<String> getLocationsName();
     ArrayList<String> getManagers();
     ArrayList<String> getJobs();
+    HashMap<String,String> getLogInData() ;  //HashMap with all emails and passwords from database
     Job getJob(int id);
     Job getJobbyName(String name);
     Employee getEmployee(int id);
