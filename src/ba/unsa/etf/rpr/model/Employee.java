@@ -37,8 +37,7 @@ public class Employee {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.expireDate = LocalDate.parse(expireDate, formatter1);
 
-        if (expireDate!=null && expireDate!="") this.employment=TypeOfEmployment.PERMANENT;
-        else this.employment=TypeOfEmployment.TEMPORARY;
+        this.employment=TypeOfEmployment.TEMPORARY;
         this.password=password;
     }
 

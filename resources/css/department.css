@@ -5,7 +5,7 @@
     -fx-control-inner-background: lightpink;
 }
 
-#BtnOk {
+#btnDepartment {
  -fx-text-fill: white;
      -fx-font-family: "Arial Narrow";
      -fx-font-weight: bold;
@@ -13,11 +13,29 @@
      -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
      -fx-background-radius: 10px;
  }
-
-#GridJob {
--fx-background-color: beige;
+ #btnCancel {
+  -fx-text-fill: white;
+      -fx-font-family: "Arial Narrow";
+      -fx-font-weight: bold;
+      -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+      -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+      -fx-background-radius: 10px;
+ }
+#btnDeleteDepartment {
+ -fx-text-fill: white;
+     -fx-font-family: "Arial Narrow";
+     -fx-font-weight: bold;
+     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+     -fx-background-radius: 10px;
 }
 
+#GridDepartment {
+-fx-background-color: beige;
+}
+#paneBorder {
+-fx-background-color: beige;
+}
 #BtnCancel {
 -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";

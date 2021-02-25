@@ -155,7 +155,6 @@ public class EmployeeController {
     }
 
     public void clickCancel(ActionEvent actionEvent) {
-        employee = null;
         Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
@@ -163,7 +162,7 @@ public class EmployeeController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/job.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Job.fxml"));
             JobController jobController = new JobController(null);
             loader.setController(jobController);
             root = loader.load();

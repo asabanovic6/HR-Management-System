@@ -2,21 +2,24 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.net.URL?>
+<BorderPane fx:id="paneBorder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@/css/department.css" />
+    </stylesheets>
     <center>
-        <TableView fx:id="tableViewEmployees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableViewDepartments" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="100.0" text="Odjel" />
-                <TableColumn fx:id="colLocation" prefWidth="100.0" text="Lokacija" />
-                <TableColumn fx:id="colManager" prefWidth="100.0" text="Menadžer" />
             </columns>
         </TableView>
     </center>
     <right>
-        <VBox prefHeight="402.0" prefWidth="221.0" spacing="5.0" BorderPane.alignment="CENTER">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="230.0" spacing="5.0" BorderPane.alignment="TOP_CENTER">
             <children>
                 <Button fx:id="btnDepartment" mnemonicParsing="false" onAction="#AddDepartment" prefWidth="Infinity" text="Dodaj novi odjel" />
                 <Button fx:id="btnDeleteDepartment" mnemonicParsing="false" onAction="#DeleteDepartment" prefWidth="Infinity" text="Obrisi odjel" />
@@ -26,4 +29,14 @@
             </padding>
         </VBox>
     </right>
+   <bottom>
+      <Button fx:id="btnCancel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickCancel" prefHeight="25.0" prefWidth="150.0" BorderPane.alignment="CENTER_RIGHT">
+         <BorderPane.margin>
+            <Insets bottom="5.0" right="25.0" top="5.0" />
+         </BorderPane.margin>
+          <graphic>
+              <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+          </graphic>
+      </Button>
+   </bottom>
 </BorderPane>

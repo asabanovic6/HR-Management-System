@@ -115,11 +115,13 @@ public class LogInController {
                 loader.setController(menuController);
                 root = loader.load();
                 stage.setTitle("Dodaj novu lokaciju");
-                stage.setScene(new Scene(root, 400, 265));
+                stage.setScene(new Scene(root));
+                stage.setMaximized(true);
                 stage.setResizable(true);
-                stage.show();
                 Stage thisStage = (Stage) fieldEmail.getScene().getWindow();
                 thisStage.close();
+                stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

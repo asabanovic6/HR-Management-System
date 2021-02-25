@@ -6,131 +6,151 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="GridEmployee" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@/css/employee.css" />
-    </stylesheets>
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="150.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="7.0" prefWidth="330.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <Label fx:id="label1" text="Ime i prezime : ">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label2" text="E-mail: " GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label3" text="Naziv posla: " GridPane.rowIndex="2">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin></Label>
-        <Label fx:id="label4" text="Odjel: " GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label5" text="Menadžer: " GridPane.rowIndex="4">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label6" text="Datum zaposlenja:  " GridPane.rowIndex="5">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label7" text="Datum isteka ugovora: " GridPane.rowIndex="6">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label8" text="Iznos plate: " GridPane.rowIndex="7">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label9" text="Dodatak na platu: " GridPane.rowIndex="8">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="label10" text="Password: " GridPane.rowIndex="9">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <TextField fx:id="fieldEmployeeName" GridPane.columnIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-
-    <TextField fx:id="fieldJob" GridPane.columnIndex="1" GridPane.rowIndex="2">
-        <GridPane.margin>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-        </GridPane.margin></TextField>
-        <TextField fx:id="fieldDepartment" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldManager" GridPane.columnIndex="1" GridPane.rowIndex="4">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldHireDate" GridPane.columnIndex="1" GridPane.rowIndex="5">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldExpireDate" GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldSalary" GridPane.columnIndex="1" GridPane.rowIndex="7">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <TextField fx:id="fieldCmp" GridPane.columnIndex="1" GridPane.rowIndex="8">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-        <HBox GridPane.columnIndex="1" GridPane.rowIndex="10">
-            <children>
-                <Button fx:id="BtnOk" mnemonicParsing="false" onAction="#clickOk" prefHeight="30.0" prefWidth="100.0" text="Ok">
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="BtnCancel" mnemonicParsing="false" onAction="#clickCancel" prefHeight="30.0" prefWidth="100.0">
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="5.0" top="5.0" />
-                    </HBox.margin>
-                    <graphic>
-                        <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-            </children>
-        </HBox>
-      <Button fx:id="btnChangePassword" mnemonicParsing="false" onAction="#ChangePassword" text="Promijeni password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-    </children>
-</GridPane>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane fx:id="GridEmployee" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
+          <stylesheets>
+              <URL value="@/css/employee.css" />
+          </stylesheets>
+          <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="7.0" prefWidth="330.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+              <Label fx:id="label1" text="Ime i prezime : ">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label2" text="E-mail: " GridPane.rowIndex="1">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label3" text="Naziv posla: " GridPane.rowIndex="2">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+            </Label>
+              <Label fx:id="label4" text="Odjel: " GridPane.rowIndex="3">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label5" text="Menadžer: " GridPane.rowIndex="4">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label6" text="Datum zaposlenja:  " GridPane.rowIndex="5">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label7" text="Datum isteka ugovora: " GridPane.rowIndex="6">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label8" text="Iznos plate: " GridPane.rowIndex="7">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label9" text="Dodatak na platu: " GridPane.rowIndex="8">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="label10" text="Password: " GridPane.rowIndex="10">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <TextField fx:id="fieldEmployeeName" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldEmail" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+      
+          <TextField fx:id="fieldJob" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+              <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+              </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldDepartment" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldManager" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldHireDate" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldExpireDate" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldSalary" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <TextField fx:id="fieldCmp" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="8" GridPane.vgrow="NEVER">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+              <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                  <children>
+                      <Button fx:id="BtnCancel" alignment="CENTER" cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#clickCancel" prefHeight="30.0" prefWidth="100.0" HBox.hgrow="NEVER">
+                          <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="5.0" top="5.0" />
+                          </HBox.margin>
+                          <graphic>
+                              <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                      </Button>
+                  </children>
+              </HBox>
+            <Button fx:id="btnChangePassword" mnemonicParsing="false" onAction="#ChangePassword" text="Promijeni password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Label fx:id="label10" layoutX="20.0" layoutY="335.0" text="Tip zaposlenja: " GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="filedTypeOfEmployment" layoutX="181.0" layoutY="331.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </GridPane.margin>
+            </TextField>
+          </children>
+      </GridPane>
+   </center>
+</BorderPane>

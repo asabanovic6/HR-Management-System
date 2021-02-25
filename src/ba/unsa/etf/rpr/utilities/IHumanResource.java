@@ -12,6 +12,7 @@ public interface IHumanResource {
 
     //Edit - methods
     void editEmployee(Employee employee);
+     void changePassword (Employee employee,String newPassword);
 
     //Add - methods
     void addNewManagerToDepartment (Manager employee, Department department) throws NonExistentDepartment;
@@ -43,6 +44,7 @@ public interface IHumanResource {
     Employee searchEmployeeByName (String  name);
     Department searchDepartmentbyName(String name);
     Location searchLocationsByName (String  name);
+    String getLocationName(int id);
 
     //Delete - methods
     void deleteDepartment(String departmentName);

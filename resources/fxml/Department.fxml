@@ -6,59 +6,65 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="GridDepartment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@/css/department.css" />
-    </stylesheets>
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.4" minWidth="5.0" prefWidth="114.4" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.4" minWidth="7.0" prefWidth="195.80000000000004" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.39999999999995" minWidth="10.0" prefWidth="123.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <HBox prefHeight="51.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <children>
-                <Button fx:id="BtnOk" mnemonicParsing="false" onAction="#clickOk" prefHeight="30.0" prefWidth="100.0" text="Ok">
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="BtnCancel" mnemonicParsing="false" onAction="#clickCancel" prefHeight="30.0" prefWidth="100.0">
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="5.0" top="5.0" />
-                    </HBox.margin>
-                    <graphic>
-                        <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
-                    </graphic>
-                </Button>
-            </children></HBox>
-        <Label fx:id="Label1" text="Naziv odjela: ">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="Label2" text="Menadžer odjela: " GridPane.rowIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <Label fx:id="Label3" text="Lokacija odjela: " GridPane.rowIndex="2">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-            </GridPane.margin>
-        </Label>
-        <TextField fx:id="fieldDepName" GridPane.columnIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-            </GridPane.margin></TextField>
-      <ChoiceBox fx:id="choiceManager" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <ChoiceBox fx:id="choiceLocation" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Button fx:id="BtnAddLocation" mnemonicParsing="false" onAction="#addLocation" text="Dodaj novu lokaciju" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-    </children>
-</GridPane>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane fx:id="GridDepartment" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0">
+          <stylesheets>
+              <URL value="@/css/department.css" />
+          </stylesheets>
+          <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.4" minWidth="5.0" prefWidth="114.4" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.4" minWidth="7.0" prefWidth="195.80000000000004" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.39999999999995" minWidth="10.0" prefWidth="123.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+              <HBox prefHeight="51.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <children>
+                      <Button fx:id="BtnOk" mnemonicParsing="false" onAction="#clickOk" prefHeight="30.0" prefWidth="100.0" text="Ok">
+                          <HBox.margin>
+                              <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                          </HBox.margin>
+                      </Button>
+                      <Button fx:id="BtnCancel" mnemonicParsing="false" onAction="#clickCancel" prefHeight="30.0" prefWidth="100.0">
+                          <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="5.0" top="5.0" />
+                          </HBox.margin>
+                          <graphic>
+                              <ImageView fx:id="imgView" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                          </graphic>
+                      </Button>
+                  </children>
+            </HBox>
+              <Label fx:id="Label1" text="Naziv odjela: ">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="Label2" text="Menadžer odjela: " GridPane.rowIndex="1">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <Label fx:id="Label3" text="Lokacija odjela: " GridPane.rowIndex="2">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+              </Label>
+              <TextField fx:id="fieldDepName" GridPane.columnIndex="1">
+                  <GridPane.margin>
+                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                  </GridPane.margin>
+            </TextField>
+            <ChoiceBox fx:id="choiceManager" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="choiceLocation" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="BtnAddLocation" mnemonicParsing="false" onAction="#addLocation" text="Dodaj novu lokaciju" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+          </children>
+      </GridPane>
+   </center>
+</BorderPane>

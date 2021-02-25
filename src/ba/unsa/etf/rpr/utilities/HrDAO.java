@@ -18,7 +18,7 @@ public class HrDAO implements  IHumanResource{
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
             getDepartmentsPS,getDepartmentsOnLocationPS,getLocationsPS,getLocationPS,getJobsPS,searchEmployeePS,deleteWorkerPS,
             searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
-            getJobPS,editEmployeePS,getJobbyNamePS,getEmployeeByEmailPS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS, getPasswordPS,getEmployeesPS;
+            getJobPS,editEmployeePS,getJobbyNamePS,changePasswordPS,getEmployeeByEmailPS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS, getPasswordPS,getPasswordOfEmployeePS,getEmployeesPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -82,6 +82,7 @@ public class HrDAO implements  IHumanResource{
             determineEmployeeIdPS = conn.prepareStatement("SELECT MAX(employee_id)+1 FROM employees");
 
             editEmployeePS = conn.prepareStatement("UPDATE employees SET expire_date=?, salary=?, cmp=? WHERE employee_id=?");
+            changePasswordPS = conn.prepareStatement("UPDATE employees SET password=? WHERE email=?");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,6 +98,16 @@ public class HrDAO implements  IHumanResource{
             editEmployeePS.setInt(2,employee.getSalary());
             editEmployeePS.setDouble(3,employee.getCmp());
             editEmployeePS.setInt(4,employee.getEmployeeId());
+            editEmployeePS.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void changePassword (Employee employee,String newPassword)  {
+        try {
+            changePasswordPS.setString(1,newPassword);
+           changePasswordPS.setString(2,employee.getEmail());
+           changePasswordPS.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -604,6 +615,17 @@ public class HrDAO implements  IHumanResource{
             ResultSet rs = getLocationPS.executeQuery();
             if (!rs.next()) return null;
             return getLocationFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String getLocationName (int id) {
+        try {
+            getLocationPS.setInt(1, id);
+            ResultSet rs = getLocationPS.executeQuery();
+            if (!rs.next()) return null;
+            return getLocationFromResultSet(rs).getCity();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
