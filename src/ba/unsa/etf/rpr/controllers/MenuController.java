@@ -87,7 +87,7 @@ public class MenuController {
            e.printStackTrace();
        }
    }
-    public void reports ( ActionEvent actionEvent) {
+    public void report ( ActionEvent actionEvent) {
         try {
             new Report().showReport(dao.getConnection());
         } catch (JRException e1) {
