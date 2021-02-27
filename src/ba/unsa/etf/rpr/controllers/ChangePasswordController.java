@@ -29,7 +29,7 @@ public class ChangePasswordController {
 
         fieldOldPassword.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidatePassword(newName)) {
+            if (!newName.isEmpty() && validatePassword(newName)) {
                 fieldOldPassword.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldOldPassword.getStyleClass().add("poljeIspravno");
             } else {
@@ -39,7 +39,7 @@ public class ChangePasswordController {
         });
         fieldNewPassword.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidatePassword(newName)) {
+            if (!newName.isEmpty() && validatePassword(newName)) {
                 fieldNewPassword.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldNewPassword.getStyleClass().add("poljeIspravno");
             } else {
@@ -49,7 +49,7 @@ public class ChangePasswordController {
         });
         fieldNewPasswordSec.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidatePassword(newName)) {
+            if (!newName.isEmpty() && validatePassword(newName)) {
                 fieldNewPasswordSec.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldNewPasswordSec.getStyleClass().add("poljeIspravno");
             } else {
@@ -63,7 +63,7 @@ public class ChangePasswordController {
 
     }
 
-    private boolean ValidatePassword(String password) {
+    private boolean validatePassword(String password) {
         if (password.length() < 8) return false;
         return true;
     }

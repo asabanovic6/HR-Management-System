@@ -12,7 +12,7 @@ public class Employee {
     private LocalDate hireDate;
     private Department department;
     private Job job;
-    private int Salary;
+    private int salary;
     private double cmp;
     private LocalDate expireDate;
     private TypeOfEmployment employment;
@@ -31,7 +31,7 @@ public class Employee {
         this.email = email;
         this.department = department;
         this.job= job;
-        Salary = salary;
+        this.salary = salary;
         this.cmp = cmp;
 
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -77,9 +77,8 @@ public class Employee {
         return hireDate;
     }
 
-    public void setHireDate(String hireDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.hireDate = LocalDate.parse(hireDate, formatter);
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate=hireDate;
     }
 
     public Department getDepartment() {
@@ -99,11 +98,11 @@ public class Employee {
     }
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(int salary) {
-        Salary = salary;
+        salary = salary;
     }
 
     public double getCmp() {
@@ -118,9 +117,8 @@ public class Employee {
         return expireDate;
     }
 
-    public void setExpireDate(String expireDate) {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.expireDate = LocalDate.parse(expireDate, formatter1);
+    public void setExpireDate(LocalDate expireDate) {
+       this.expireDate=expireDate;
     }
 
     public TypeOfEmployment getEmployment() {

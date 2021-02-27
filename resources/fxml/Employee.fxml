@@ -27,6 +27,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="label1" text="Ime i prezime : ">
@@ -74,33 +75,28 @@
                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="fieldEmployeeName" GridPane.columnIndex="1">
+            <TextField fx:id="fieldEmployeeName" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="fieldEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="fieldEmail" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </TextField>
       
-            <TextField fx:id="fieldManager" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TextField fx:id="fieldManager" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </TextField>
-            <Slider fx:id="SliderSalary" majorTickUnit="10.0" max="1000.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </GridPane.margin>
-            </Slider>
-            <TextField fx:id="fieldCmp" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <TextField fx:id="fieldCmp" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="8" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </TextField>
-            <HBox GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <HBox GridPane.columnIndex="1" GridPane.rowIndex="10">
                <children>
                   <Button fx:id="BtnOk" mnemonicParsing="false" onAction="#clickOk" prefHeight="30.0" prefWidth="100.0" text="Ok">
                      <HBox.margin>
@@ -117,12 +113,12 @@
                   </Button>
                </children>
             </HBox>
-            <DatePicker fx:id="pickerHireDate" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <DatePicker fx:id="pickerHireDate" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </DatePicker>
-            <DatePicker fx:id="pickerExpireDate" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <DatePicker fx:id="pickerExpireDate" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -134,7 +130,7 @@
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Button fx:id="BtnAddNewJob" mnemonicParsing="false" onAction="#AddNewJob" text="Dodaj novi posao">
+                  <Button fx:id="BtnAddNewJob" mnemonicParsing="false" onAction="#addNewJob" text="Dodaj novi posao">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
@@ -148,13 +144,28 @@
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Button fx:id="BtnAddNewDepartment" mnemonicParsing="false" onAction="#AddNewDepartment" text="Dodaj novi odjel">
+                  <Button fx:id="BtnAddNewDepartment" mnemonicParsing="false" onAction="#addNewDepartment" text="Dodaj novi odjel" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
+            <Label fx:id="label11" layoutX="20.0" layoutY="352.0" text="Password: " GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="fieldPassword" layoutX="181.0" layoutY="348.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="9" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="fieldSalary" layoutX="181.0" layoutY="348.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="7" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </center>

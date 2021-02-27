@@ -35,7 +35,7 @@ public class LogInController {
         }
         fieldEmail.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateEmail(newName) ) {
+            if (!newName.isEmpty() ) {
                 fieldEmail.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldEmail.getStyleClass().add("poljeIspravno");
             } else {
@@ -45,7 +45,7 @@ public class LogInController {
         });
             fieldPassword.textProperty().addListener((obs, oldName, newName) -> {
 
-                if (!newName.isEmpty() && ValidatePassword(newName) ) {
+                if (!newName.isEmpty()  ) {
                     fieldPassword.getStyleClass().removeAll("poljeNijeIspravno");
                     fieldPassword.getStyleClass().add("poljeIspravno");
                 } else {
@@ -57,23 +57,11 @@ public class LogInController {
 
     }
 
-    private boolean ValidatePassword(String password) {
-        if (password.length()<8) return false;
-        return true;
-    }
 
-    private boolean ValidateEmail (String email) {
-        int brojac=0;
-        if (email.charAt(0)=='@' || email.charAt(email.length()-1)=='@') return false;
-        for (int i =1;i<email.length();i++) {
-            if (email.charAt(i)=='@') brojac++;
-        }
-        if (!email.contains(".")) return false;
-        if (brojac==0) return false;
-        return true;
-    }
 
-    public void Login (ActionEvent actionEvent) {
+
+
+    public void logIn (ActionEvent actionEvent) {
         boolean Ok = true;
         if (fieldEmail.getText().trim().isEmpty()) {
             fieldEmail.getStyleClass().removeAll("poljeIspravno");

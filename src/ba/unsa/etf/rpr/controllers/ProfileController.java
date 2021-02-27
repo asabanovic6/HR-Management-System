@@ -112,7 +112,7 @@ public class ProfileController {
 
     }
 
-    public void ChangePassword (ActionEvent actionEvent) {
+    public void changePassword (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {

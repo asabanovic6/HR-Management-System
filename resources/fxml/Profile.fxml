@@ -139,8 +139,8 @@
                       </Button>
                   </children>
               </HBox>
-            <Button fx:id="btnChangePassword" mnemonicParsing="false" onAction="#ChangePassword" text="Promijeni password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-            <Label fx:id="label10" layoutX="20.0" layoutY="335.0" text="Tip zaposlenja: " GridPane.rowIndex="9">
+            <Button fx:id="btnChangePassword" mnemonicParsing="false" onAction="#changePassword" text="Promijeni password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="10" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Label fx:id="label11" layoutX="20.0" layoutY="335.0" text="Tip zaposlenja: " GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                </GridPane.margin>

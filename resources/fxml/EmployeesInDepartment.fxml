@@ -23,16 +23,16 @@
                 <TableColumn fx:id="colEmployment" prefWidth="100.0" text="Tip zaposlenja" />
                 <TableColumn fx:id="colSalary" prefWidth="100.0" text="Plata" />
                 <TableColumn fx:id="colCmp" prefWidth="100.0" text="Dodatak na platu" />
+                <TableColumn fx:id="colManager" prefWidth="100.0" text="Menadzer" />
             </columns>
         </TableView>
     </center>
     <right>
         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="200.0" spacing="5.0" BorderPane.alignment="TOP_CENTER">
             <children>
-                <Button fx:id="btnAddEmployee" mnemonicParsing="false" onAction="#AddEmployee" prefWidth="Infinity" text="Dodaj novog zaposlenika" />
-                <Button fx:id="btnChangeEmployee" mnemonicParsing="false" onAction="#ChangeEmployee" prefWidth="Infinity" text="Izmjeni zaposlenika" />
-                <Button fx:id="btnChangeContrack" mnemonicParsing="false" onAction="#ChangeContrack" prefWidth="Infinity" text="Promijeni ugovor" />
-                <Button fx:id="btnResignFromWork" mnemonicParsing="false" onAction="#ResignFromWork" prefWidth="Infinity" text="Otkazi ugovor" />
+                <Button fx:id="btnAddEmployee" mnemonicParsing="false" onAction="#addEmployee" prefWidth="Infinity" text="Dodaj novog zaposlenika" />
+                <Button fx:id="btnChangeEmployee" mnemonicParsing="false" onAction="#changeEmployee" prefWidth="Infinity" text="Izmjeni zaposlenika" />
+                <Button fx:id="btnResignFromWork" mnemonicParsing="false" onAction="#resignFromWork" prefWidth="Infinity" text="Otkazi ugovor" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -164,8 +164,8 @@ public class HrDAOTest {
         worker.setSalary(1000);
 
         worker.setJob(dao.getJob(2));
-        worker.setHireDate("2020-10-05");
-        worker.setExpireDate("2030-10-05");
+        worker.setHireDate(LocalDate.now());
+        worker.setExpireDate(LocalDate.now());
         worker.setDepartment(dao.getDepartment(2));
         worker.setPassword("password");
         dao.addWorker(worker);
@@ -183,8 +183,8 @@ public class HrDAOTest {
         man.setSalary(1000);
         Job job = dao.getJob(1);
         man.setJob(job);
-        man.setHireDate("2020-10-05");
-        man.setExpireDate("2030-10-05");
+        man.setHireDate(LocalDate.now());
+        man.setExpireDate(LocalDate.now());
         Department department = dao.getDepartment(3);
         man.setDepartment(department);
         man.setPassword("password");

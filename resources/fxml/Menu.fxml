@@ -18,16 +18,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnDepartments" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Departments" prefHeight="35.0" prefWidth="150.0" text="Odjeli" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-            <Button fx:id="btnEmployees" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Employees" prefHeight="35.0" prefWidth="150.0" text="Zaposleni" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-            <Button fx:id="btnReports" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#Reports" prefHeight="35.0" prefWidth="150.0" text="Izvještaji" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-            <Button fx:id="btnSelfProfile" layoutX="73.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#SelfProfile" prefHeight="35.0" prefWidth="150.0" text="Lični profil" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-            <Button fx:id="btnLogOut" layoutX="73.0" layoutY="191.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#LogOut" prefHeight="35.0" prefWidth="150.0" text="Odjavi se" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnDepartments" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#departments" prefHeight="35.0" prefWidth="150.0" text="Odjeli" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnEmployees" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#employees" prefHeight="35.0" prefWidth="150.0" text="Zaposleni u odjelu" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnReports" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#reports" prefHeight="35.0" prefWidth="150.0" text="Izvještaji" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnSelfProfile" layoutX="73.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#selfProfile" prefHeight="35.0" prefWidth="150.0" text="Lični profil" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnLogOut" layoutX="73.0" layoutY="191.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="150.0" text="Odjavi se" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
             <Label fx:id="label1" text="Odaberite željenu opciju: " GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+            <Button fx:id="btnManagers" layoutX="85.0" layoutY="144.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#managers" prefHeight="35.0" prefWidth="150.0" text="Menadžeri" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
          </children>
       </GridPane>
    </center>

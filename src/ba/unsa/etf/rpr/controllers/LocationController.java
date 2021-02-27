@@ -43,7 +43,7 @@ public class LocationController {
         );
         fieldCity.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateCity(newName) ) {
+            if (!newName.isEmpty() && validateCity(newName) ) {
                 fieldCity.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldCity.getStyleClass().add("poljeIspravno");
             } else {
@@ -53,7 +53,7 @@ public class LocationController {
         });
     }
 
-    private boolean ValidateCity(String newName) {
+    private boolean validateCity(String newName) {
         if (newName.length()>20) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 

@@ -28,8 +28,9 @@ public class EmployeeController {
     public TextField fieldEmployeeName;
     public TextField fieldEmail;
     public TextField fieldManager;
-    public Slider sliderSalary;
+    public TextField fieldSalary;
     public TextField fieldCmp;
+    public TextField fieldPassword;
     public DatePicker pickerHireDate;
     public DatePicker pickerExpireDate;
     public ChoiceBox<String> choiceJob;
@@ -68,12 +69,11 @@ public class EmployeeController {
             for (String dep : departments)
                 if (dep == employee.getDepartment().getDepartmentName())
                     choiceDepartment.getSelectionModel().select(dep);
-            sliderSalary.setMin(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMinSalary());
-            sliderSalary.setMax(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMaxSalary());
 
             pickerHireDate.setValue(employee.getHireDate());
             pickerExpireDate.setValue(employee.getExpireDate());
             fieldCmp.setText(Double.toString(employee.getCmp()));
+            fieldSalary.setText(Integer.toString(employee.getSalary()));
         }
         else {
             choiceJob.getSelectionModel().selectFirst();
@@ -81,7 +81,7 @@ public class EmployeeController {
         }
         fieldEmployeeName.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateEmployeeName(newName) ) {
+            if (!newName.isEmpty() && validateEmployeeName(newName) ) {
                 fieldEmployeeName.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldEmployeeName.getStyleClass().add("poljeIspravno");
             } else {
@@ -91,7 +91,7 @@ public class EmployeeController {
         });
         fieldEmail.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateEmail(newName) ) {
+            if (!newName.isEmpty() && validateEmail(newName) ) {
                 fieldEmail.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldEmail.getStyleClass().add("poljeIspravno");
             } else {
@@ -99,10 +99,19 @@ public class EmployeeController {
                 fieldEmail.getStyleClass().add("poljeNijeIspravno");
             }
         });
+        fieldPassword.textProperty().addListener((obs, oldName, newName) -> {
 
+            if (!newName.isEmpty() && newName.length()<6 ) {
+                fieldPassword.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldPassword.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldPassword.getStyleClass().removeAll("poljeIspravno");
+                fieldPassword.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
         fieldCmp.textProperty().addListener((obs, oldValue, newValue) -> {
 
-            if (!newValue.isEmpty() && ValidateCmp(newValue) ) {
+            if (!newValue.isEmpty() && validateCmp(newValue) ) {
                 fieldCmp.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldCmp.getStyleClass().add("poljeIspravno");
             } else {
@@ -110,12 +119,22 @@ public class EmployeeController {
                 fieldCmp.getStyleClass().add("poljeNijeIspravno");
             }
         });
+        fieldSalary.textProperty().addListener((obs, oldValue, newValue) -> {
+
+            if (!newValue.isEmpty() && validateSalary(newValue) ) {
+                fieldSalary.getStyleClass().removeAll("poljeNijeIspravno");
+                fieldSalary.getStyleClass().add("poljeIspravno");
+            } else {
+                fieldSalary.getStyleClass().removeAll("poljeIspravno");
+                fieldSalary.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
         imgView.setImage(
                 new Image("images/application-exit.png")
         );
     }
 
-    private boolean ValidateCmp(String newValue) {
+    private boolean validateCmp(String newValue) {
         for (int i=1;i<newValue.length();i++)
             if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
         double cmp = 0;
@@ -127,11 +146,22 @@ public class EmployeeController {
         if (cmp<0) return false;
         else return true;
     }
+    private boolean validateSalary(String newValue) {
+        for (int i=1;i<newValue.length();i++)
+            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
+        int cmp = 0;
+        try {
+            cmp = Integer.parseInt(fieldCmp.getText());
+        } catch (NumberFormatException e) {
+            // ...
+        }
+        if (cmp<0 || cmp<dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMinSalary() || cmp>dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMaxSalary()) return false;
+        else return true;
+    }
 
 
 
-
-    private boolean ValidateEmployeeName(String newName) {
+    private boolean validateEmployeeName(String newName) {
         if (newName.length()>35) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 
@@ -140,7 +170,7 @@ public class EmployeeController {
         }
         return true;
     }
-    private boolean ValidateEmail (String email) {
+    private boolean validateEmail (String email) {
         int brojac=0;
         if (email.charAt(0)=='@' || email.charAt(email.length()-1)=='@') return false;
         for (int i =1;i<email.length();i++) {
@@ -158,7 +188,7 @@ public class EmployeeController {
         Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
-    public void AddNewJob (ActionEvent actionEvent) {
+    public void addNewJob (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {
@@ -167,7 +197,7 @@ public class EmployeeController {
             loader.setController(jobController);
             root = loader.load();
             stage.setTitle("Dodaj novi posao u listu poslova");
-            stage.setScene(new Scene(root, 400, 265));
+            stage.setScene(new Scene(root));
             stage.setResizable(true);
             stage.show();
 
@@ -182,7 +212,7 @@ public class EmployeeController {
             e.printStackTrace();
         }
     }
-    public void AddNewDepartment (ActionEvent actionEvent) {
+    public void addNewDepartment (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {
@@ -191,7 +221,7 @@ public class EmployeeController {
             loader.setController(departmentController);
             root = loader.load();
             stage.setTitle("Dodaj novi odjel u listu odjela");
-            stage.setScene(new Scene(root, 400, 265));
+            stage.setScene(new Scene(root));
             stage.setResizable(true);
             stage.show();
 
@@ -226,6 +256,14 @@ public class EmployeeController {
             fieldEmail.getStyleClass().removeAll("poljeNijeIspravno");
             fieldEmail.getStyleClass().add("poljeIspravno");
         }
+        if (fieldPassword.getText().trim().isEmpty()) {
+            fieldPassword.getStyleClass().removeAll("poljeIspravno");
+            fieldPassword.getStyleClass().add("poljeNijeIspravno");
+            Ok = false;
+        } else {
+            fieldPassword.getStyleClass().removeAll("poljeNijeIspravno");
+            fieldPassword.getStyleClass().add("poljeIspravno");
+        }
         if (choiceJob.getItems().isEmpty()) {
             choiceJob.getStyleClass().removeAll("poljeIspravno");
             choiceJob.getStyleClass().add("poljeNijeIspravno");
@@ -258,15 +296,13 @@ public class EmployeeController {
         employee.setEmployeeName(fieldEmployeeName.getText());
         employee.setEmail(fieldEmail.getText());
         employee.setCmp(Double.parseDouble(fieldCmp.getText()));
-        employee.setSalary((int) sliderSalary.getValue());
+        employee.setSalary(Integer.parseInt(fieldSalary.getText()));
         employee.setDepartment(dao.getDepartmentByName(choiceDepartment.getSelectionModel().getSelectedItem()));
         employee.setJob(dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String hireDate = formatter.format(employee.getHireDate());
-        employee.setHireDate(hireDate);
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String expireDate = formatter1.format(employee.getExpireDate());
-        employee.setExpireDate(expireDate);
+        employee.setPassword(fieldPassword.getText());
+
+        employee.setHireDate(pickerHireDate.getValue());
+        employee.setExpireDate(pickerExpireDate.getValue());
 
         Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();

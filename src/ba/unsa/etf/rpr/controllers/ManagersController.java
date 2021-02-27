@@ -28,17 +28,17 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 
-public class EmployeesFromDepController {
+public class ManagersController {
     private Employee employee;
-    private ObservableList<Employee> employees;
+    private ObservableList<Manager> employees;
     private HrDAO dao;
-    public TableView<Employee> tableViewEmployees;
+    public TableView<Manager> tableViewEmployees;
     public TableColumn colId;
     public TableColumn colName;
     public TableColumn colEmail;
-    public TableColumn<Worker,String> colDepartment;
-    public TableColumn<Worker,String> colJob;
-    public TableColumn<Worker,String> colManager;  //using extends Employee bc employee can be manager or worker
+    public TableColumn<Manager,String> colDepartment;
+    public TableColumn<Manager,String> colJob;
+    public TableColumn<Manager,String> colManager;
     public TableColumn colHireDate;
     public TableColumn colExpireDate;
     public TableColumn colEmployment;
@@ -47,13 +47,10 @@ public class EmployeesFromDepController {
     @FXML
     private ImageView imgView;
 
-    public EmployeesFromDepController(Employee employee) throws NonExistentDepartment {
+    public ManagersController(Employee employee) throws NonExistentDepartment {
         this.employee=employee;
         this.dao=HrDAO.getInstance();
-        if (employee instanceof Manager)
-        this.employees= FXCollections.observableArrayList(dao.getWorkersFromManager(employee.getEmployeeId()));
-        if (employee instanceof  Worker)
-            this.employees= FXCollections.observableArrayList(dao.getWorkersFromManager(((Worker) employee).getManager().getEmployeeId()));
+            this.employees= FXCollections.observableArrayList(dao.getAllManagers());
 
     }
 
@@ -64,17 +61,18 @@ public class EmployeesFromDepController {
         colName.setCellValueFactory(new PropertyValueFactory("employeeName"));
         colEmail.setCellValueFactory(new PropertyValueFactory("email"));
         if (employee instanceof Worker) colEmployment.setVisible(false);
-     else   colEmployment.setCellValueFactory(new PropertyValueFactory("employment"));
+        else   colEmployment.setCellValueFactory(new PropertyValueFactory("employment"));
         if (employee instanceof Worker) colHireDate.setVisible(false);
-      else   colHireDate.setCellValueFactory(new PropertyValueFactory("hireDate"));
+        else   colHireDate.setCellValueFactory(new PropertyValueFactory("hireDate"));
         if (employee instanceof Worker) colExpireDate.setVisible(false);
         else colExpireDate.setCellValueFactory(new PropertyValueFactory("expireDate"));
         if (employee instanceof Worker) colSalary.setVisible(false);
         else colSalary.setCellValueFactory(new PropertyValueFactory("salary"));
         if (employee instanceof  Worker) colCmp.setVisible(false);
-      else   colCmp.setCellValueFactory(new PropertyValueFactory("cmp"));
-        colManager.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getManager().getEmployeeName()));
-        colDepartment.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDepartment().getDepartmentName()));
+        else   colCmp.setCellValueFactory(new PropertyValueFactory("cmp"));
+      colManager.setVisible(false);
+      colDepartment.setVisible(false);
+   // colDepartment.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDepartment().getDepartmentName()));
         colJob.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getJob().getJobTitle()));
 
         imgView.setImage(
@@ -125,10 +123,10 @@ public class EmployeesFromDepController {
                 stage.setResizable(true);
                 stage.show();
                 stage.setOnHiding(event -> {
-                    Worker emp = (Worker) employeeController.getEmployee();
+                    Manager emp = (Manager) employeeController.getEmployee();
                     if (emp != null) {
-                        dao.addWorker(emp);
-                        tableViewEmployees.setItems(FXCollections.observableArrayList(dao.getEmployees()));
+                        dao.addManager(emp);
+                        tableViewEmployees.setItems(FXCollections.observableArrayList(dao.getAllManagers()));
                     }
                 });
 
@@ -168,7 +166,7 @@ public class EmployeesFromDepController {
                         // Ovdje ne smije doći do izuzetka jer se prozor neće zatvoriti
                         try {
                             dao.editEmployee(empl);
-                            employees.setAll(dao.getEmployees());
+                            employees.setAll(dao.getAllManagers());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -202,9 +200,9 @@ public class EmployeesFromDepController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 if (emp instanceof Worker)
-                dao.deleteWorker(emp.getEmployeeName());
+                    dao.deleteWorker(emp.getEmployeeName());
                 else dao.deleteManager(emp.getEmployeeName());
-                employees.setAll(dao.getEmployees());
+                employees.setAll(dao.getAllManagers());
                 tableViewEmployees.setItems(employees);
             }
         }

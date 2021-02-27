@@ -18,7 +18,7 @@ public class HrDAO implements  IHumanResource{
     private PreparedStatement getEmployeePS,getDepartmentPS,getEmployeesFromDepartmentPS,getManagerFromDepartmentPS,getWorkersFromManagerPS,
             getDepartmentsPS,getDepartmentsOnLocationPS,getLocationsPS,getLocationPS,getJobsPS,searchEmployeePS,deleteWorkerPS,
             searchDepartmentPS,deleteDepartmentPS,deleteManagerPS,addJobPS,addDepartmentPS,addLocationPS,addEmployeePS,determineJobIdPS,determineDepartmentIdPS,determineLocationIdPS,determineEmployeeIdPS,
-            getJobPS,editEmployeePS,getJobbyNamePS,changePasswordPS,getEmployeeByEmailPS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS, getPasswordPS,getPasswordOfEmployeePS,getEmployeesPS;
+            getJobPS,editEmployeePS,getEmployeesPS,getJobbyNamePS,changePasswordPS,getEmployeeByEmailPS,getDepartmentbyNamePS,getManagersPs,searchLocationsPS, getPasswordPS;
 
     public static HrDAO getInstance() {
         if (instance==null) instance= new HrDAO();
@@ -58,6 +58,7 @@ public class HrDAO implements  IHumanResource{
             getLocationPS=conn.prepareStatement("SELECT * FROM locations WHERE location_id=?");
             getJobPS = conn.prepareStatement("SELECT * FROM jobs WHERE job_id=?");
             getJobsPS = conn.prepareStatement("SELECT * FROM jobs");
+            getEmployeesPS = conn.prepareStatement("SELECT * FROM employees ORDER BY department_id");
             getJobbyNamePS = conn.prepareStatement("SELECT * FROM jobs WHERE job_title=?");
             getPasswordPS = conn.prepareStatement("SELECT password FROM employees WHERE email=?");
             getEmployeesPS = conn.prepareStatement("SELECT * FROM employees");
@@ -392,6 +393,19 @@ public class HrDAO implements  IHumanResource{
         }
         return result;
     }
+    public ArrayList<Employee> getEmployees() {
+        ArrayList<Employee> result = new ArrayList();
+        try {
+            ResultSet rs = getEmployeesPS.executeQuery();
+            while (rs.next()) {
+                Employee emp = getEmployeeFromResultSet(rs);
+                result.add(emp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     public ArrayList<String> getDepartmentsByNames() {
         ArrayList<String> result = new ArrayList();
         try {
@@ -452,6 +466,19 @@ public class HrDAO implements  IHumanResource{
             while (rs.next()) {
                 Manager manager = getManagerFromResultSet(rs);
                 result.add(manager.getEmployeeName());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public ArrayList<Manager> getAllManagers() {
+        ArrayList<Manager> result = new ArrayList();
+        try {
+            ResultSet rs = getManagersPs.executeQuery();
+            while (rs.next()) {
+                Manager manager = getManagerFromResultSet(rs);
+                result.add(manager);
             }
         } catch (SQLException e) {
             e.printStackTrace();

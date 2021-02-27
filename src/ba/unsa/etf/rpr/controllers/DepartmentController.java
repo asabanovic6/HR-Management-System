@@ -72,7 +72,7 @@ public class DepartmentController {
         );
         fieldDepName.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateDepName(newName) ) {
+            if (!newName.isEmpty() && validateDepName(newName) ) {
                 fieldDepName.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldDepName.getStyleClass().add("poljeIspravno");
             } else {
@@ -82,7 +82,7 @@ public class DepartmentController {
         });
     }
 
-    private boolean ValidateDepName(String newName) {
+    private boolean validateDepName(String newName) {
         if (newName.length()>35) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 

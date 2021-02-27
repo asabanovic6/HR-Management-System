@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.exception.NonExistentDepartment;
 import ba.unsa.etf.rpr.model.Employee;
 
 import ba.unsa.etf.rpr.model.Location;
@@ -22,7 +23,7 @@ public class MenuController {
         this.employee=employee;
     }
 
-    public void Departments (ActionEvent actionEvent) {
+    public void departments (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {
@@ -42,14 +43,48 @@ public class MenuController {
         }
     }
 
-    public void Employees (ActionEvent actionEvent) {
+    public void employees (ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
+            EmployeesFromDepController employeesFromDepController = new EmployeesFromDepController(employee);
+            loader.setController(employeesFromDepController);
+            root = loader.load();
+            stage.setTitle("Zaposleni");
+            stage.setScene(new Scene(root));
+            stage.setMaximized(true);
+            stage.setResizable(true);
+            stage.show();
+            Stage thisStage = (Stage) label1.getScene().getWindow();
+            thisStage.close();
+        } catch (IOException | NonExistentDepartment e) {
+            e.printStackTrace();
+        }
+    }
+   public void managers (ActionEvent actionEvent) {
+       Stage stage = new Stage();
+       Parent root = null;
+       try {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
+           ManagersController managersController = new ManagersController(employee);
+           loader.setController(managersController);
+           root = loader.load();
+           stage.setTitle("Menadžeri");
+           stage.setScene(new Scene(root));
+           stage.setMaximized(true);
+           stage.setResizable(true);
+           stage.show();
+           Stage thisStage = (Stage) label1.getScene().getWindow();
+           thisStage.close();
+       } catch (IOException | NonExistentDepartment e) {
+           e.printStackTrace();
+       }
+   }
+    public void reports ( ActionEvent actionEvent) {
 
     }
-
-    public void Reports ( ActionEvent actionEvent) {
-
-    }
-    public void SelfProfile (ActionEvent actionEvent) {
+    public void selfProfile (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {
@@ -70,7 +105,7 @@ public class MenuController {
         }
     }
 
-    public void LogOut (ActionEvent actionEvent) {
+    public void logOut (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {

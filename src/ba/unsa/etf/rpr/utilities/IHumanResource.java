@@ -28,6 +28,7 @@ public interface IHumanResource {
     ArrayList<Employee> getEmployeesFromDepartment(int departmentId) throws NonExistentDepartment;
     Manager getManagerFromDepartment(int departmentId) throws NonExistentDepartment;
     ArrayList<Department> getDepartments();
+    ArrayList<Employee> getEmployees();
     ArrayList<String> getDepartmentsByNames();
     ArrayList<Location> getLocations();
     ArrayList<String> getLocationsName();

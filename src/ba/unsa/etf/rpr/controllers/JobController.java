@@ -40,7 +40,7 @@ public class JobController {
         );
         fieldJobTitle.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && ValidateJobTitle(newName) ) {
+            if (!newName.isEmpty() && validateJobTitle(newName) ) {
                 fieldJobTitle.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldJobTitle.getStyleClass().add("poljeIspravno");
             } else {
@@ -50,7 +50,7 @@ public class JobController {
         });
         fieldMinSalary.textProperty().addListener((obs, oldValue, newValue) -> {
 
-            if (!newValue.isEmpty() && ValidateSalaryMin(newValue) ) {
+            if (!newValue.isEmpty() && validateSalaryMin(newValue) ) {
                 fieldMinSalary.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldMinSalary.getStyleClass().add("poljeIspravno");
             } else {
@@ -60,7 +60,7 @@ public class JobController {
         });
         fieldMaxSalary.textProperty().addListener((obs, oldValue, newValue) -> {
 
-            if (!newValue.isEmpty() && ValidateSalaryMax(newValue) ) {
+            if (!newValue.isEmpty() && validateSalaryMax(newValue) ) {
                 fieldMaxSalary.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldMaxSalary.getStyleClass().add("poljeIspravno");
             } else {
@@ -71,7 +71,7 @@ public class JobController {
 
     }
 
-    private boolean ValidateJobTitle(String newName) {
+    private boolean validateJobTitle(String newName) {
         if (newName.length()>35) return false;
         if (!((newName.charAt(0) >= 'A' && newName.charAt(0) <= 'Z') || (newName.charAt(0) >= 'a' && newName.charAt(0) <= 'z'))) return false;
 
@@ -81,7 +81,7 @@ public class JobController {
         return true;
     }
 
-    private boolean ValidateSalaryMin(String newValue) {
+    private boolean validateSalaryMin(String newValue) {
         for (int i=1;i<newValue.length();i++)
             if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
         int salary = 0;
@@ -95,7 +95,7 @@ public class JobController {
         if (salary<=0) return false;
         else return true;
     }
-    private boolean ValidateSalaryMax(String newValue) {
+    private boolean validateSalaryMax(String newValue) {
         for (int i=1;i<newValue.length();i++)
             if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
         int salary = 0;

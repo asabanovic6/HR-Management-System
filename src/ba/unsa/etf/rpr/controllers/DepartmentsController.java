@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.util.Optional;
 
+
 public class DepartmentsController {
    public TableView<Department> tableViewDepartments;
    public TableColumn colId;
@@ -54,7 +55,7 @@ public class DepartmentsController {
         );
     }
 
-    public void AddDepartment (ActionEvent actionEvent) {
+    public void addDepartment (ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {
@@ -80,7 +81,7 @@ public class DepartmentsController {
         }
     }
 
-    public void DeleteDepartment (ActionEvent actionEvent) throws NonExistentDepartment {
+    public void deleteDepartment (ActionEvent actionEvent) throws NonExistentDepartment {
         Department dep = tableViewDepartments.getSelectionModel().getSelectedItem();
         if (dep == null) return;
         if (employee  instanceof Worker) {
