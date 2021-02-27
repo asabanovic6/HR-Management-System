@@ -24,7 +24,9 @@ public class HrDAO implements  IHumanResource{
         if (instance==null) instance= new HrDAO();
         return  instance;
     }
-
+    public Connection getConnection () {
+        return conn;
+    }
     private HrDAO () {
         try {
 

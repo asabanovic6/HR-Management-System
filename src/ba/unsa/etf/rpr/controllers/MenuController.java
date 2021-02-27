@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.exception.NonExistentDepartment;
 import ba.unsa.etf.rpr.model.Employee;
 
 import ba.unsa.etf.rpr.model.Location;
+import ba.unsa.etf.rpr.report.Report;
+import ba.unsa.etf.rpr.utilities.HrDAO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,16 +13,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
 
 public class MenuController {
     public Label label1;
    private  Employee employee;
+   private HrDAO dao ;
 
 
     public MenuController(Employee employee) {
+
         this.employee=employee;
+        this.dao = HrDAO.getInstance();
     }
 
     public void departments (ActionEvent actionEvent) {
@@ -82,6 +88,11 @@ public class MenuController {
        }
    }
     public void reports ( ActionEvent actionEvent) {
+        try {
+            new Report().showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
 
     }
     public void selfProfile (ActionEvent actionEvent) {
