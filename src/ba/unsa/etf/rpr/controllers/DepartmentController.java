@@ -102,7 +102,8 @@ public class DepartmentController {
         try {
 
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Location.fxml" ), bundle);            LocationController locationController = new LocationController(null);
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Location.fxml" ), bundle);
+            LocationController locationController = new LocationController();
             loader.setController(locationController);
             root = loader.load();
             Locale.setDefault(new Locale("bs", "BA"));

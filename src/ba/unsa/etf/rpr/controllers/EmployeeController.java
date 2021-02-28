@@ -100,7 +100,7 @@ public class EmployeeController {
         });
         fieldPassword.textProperty().addListener((obs, oldName, newName) -> {
 
-            if (!newName.isEmpty() && newName.length()<6 ) {
+            if (!newName.isEmpty() && newName.length()>6 ) {
                 fieldPassword.getStyleClass().removeAll("poljeNijeIspravno");
                 fieldPassword.getStyleClass().add("poljeIspravno");
             } else {
@@ -143,19 +143,19 @@ public class EmployeeController {
             // ...
         }
         if (cmp<0) return false;
-        else return true;
+        return true;
     }
     private boolean validateSalary(String newValue) {
-        for (int i=1;i<newValue.length();i++)
-            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in cmp textfield
+      for (int i=1;i<newValue.length();i++)
+            if (((newValue.charAt(i) >= 'A' && newValue.charAt(i) <= 'Z') || (newValue.charAt(i) >= 'a' && newValue.charAt(i) <= 'z'))) return false; // User cant use letter in salary textfield
         int cmp = 0;
         try {
-            cmp = Integer.parseInt(fieldCmp.getText());
+            cmp = Integer.parseInt(fieldSalary.getText());
         } catch (NumberFormatException e) {
             // ...
         }
-        if (cmp<0 || cmp<dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMinSalary() || cmp>dao.getJobbyName(choiceJob.getSelectionModel().getSelectedItem()).getMaxSalary()) return false;
-        else return true;
+        if (cmp<0 ) return false;
+         return true;
     }
 
 
@@ -268,6 +268,15 @@ public class EmployeeController {
             fieldPassword.getStyleClass().removeAll("poljeNijeIspravno");
             fieldPassword.getStyleClass().add("poljeIspravno");
         }
+
+        if (fieldSalary.getText().trim().isEmpty()) {
+            fieldSalary.getStyleClass().removeAll("poljeIspravno");
+            fieldSalary.getStyleClass().add("poljeNijeIspravno");
+            Ok = false;
+        } else {
+            fieldSalary.getStyleClass().removeAll("poljeNijeIspravno");
+            fieldSalary.getStyleClass().add("poljeIspravno");
+        }
         if (choiceJob.getItems().isEmpty()) {
             choiceJob.getStyleClass().removeAll("poljeIspravno");
             choiceJob.getStyleClass().add("poljeNijeIspravno");
@@ -285,7 +294,7 @@ public class EmployeeController {
         } catch (NumberFormatException e) {
             // ...
         }
-        if (cmp < 0) {
+        if (cmp < 0 || fieldCmp.getText().trim().isEmpty()) {
             fieldCmp.getStyleClass().removeAll("poljeIspravno");
             fieldCmp.getStyleClass().add("poljeNijeIspravno");
             Ok = false;

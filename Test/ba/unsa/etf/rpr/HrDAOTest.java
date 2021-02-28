@@ -171,7 +171,7 @@ public class HrDAOTest {
         dao.addWorker(worker);
         ArrayList<Worker> workers = dao.getWorkersFromManager(4);
         assertEquals("Senada Šabanović", workers.get(3).getEmployeeName());
-        LocalDate date = LocalDate.of(2020, 10 , 05);
+        LocalDate date = LocalDate.now();
         assertEquals(date,workers.get(3).getHireDate());
     }
     @Test

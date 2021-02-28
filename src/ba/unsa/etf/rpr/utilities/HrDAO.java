@@ -630,7 +630,7 @@ public class HrDAO implements  IHumanResource{
     public Department getDepartmentByName (String name) {
         try {
             getDepartmentbyNamePS.setString(1, name);
-            ResultSet rs = getDepartmentPS.executeQuery();
+            ResultSet rs = getDepartmentbyNamePS.executeQuery();
             if (!rs.next()) return null;
             return getDepartmentFromResultSet(rs);
         } catch (SQLException e) {

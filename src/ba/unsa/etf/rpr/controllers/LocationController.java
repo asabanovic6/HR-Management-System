@@ -21,13 +21,14 @@ public class LocationController {
 
 
 
-    public LocationController(Location location) {
+    public LocationController() {
         this.dao= HrDAO.getInstance();
         this.location = location;
         this.stage = new Stage();
     }
 
     public Location getLocation() {
+
         return location;
     }
 
