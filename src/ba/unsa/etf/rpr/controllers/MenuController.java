@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.exception.NonExistentDepartment;
 import ba.unsa.etf.rpr.model.Employee;
 
 import ba.unsa.etf.rpr.model.Location;
+import ba.unsa.etf.rpr.model.Manager;
 import ba.unsa.etf.rpr.report.Report;
 import ba.unsa.etf.rpr.utilities.HrDAO;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
@@ -96,10 +98,20 @@ public class MenuController {
        }
    }
     public void report ( ActionEvent actionEvent) {
-        try {
-            new Report().showReport(dao.getConnection());
-        } catch (JRException e1) {
-            e1.printStackTrace();
+        if (employee instanceof Manager) {
+            try {
+                new Report().showReport(dao.getConnection());
+            } catch (JRException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Onemogućeno pristup izvještaju");
+            alert.setHeaderText("Onemogućeno pristup izvještaju");
+            alert.setContentText("Pristup izvještaju ima samo menadžer!");
+
+            alert.showAndWait();
         }
 
     }

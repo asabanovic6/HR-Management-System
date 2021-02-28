@@ -61,29 +61,39 @@ public class DepartmentsController {
     }
 
     public void addDepartment (ActionEvent actionEvent) {
-        Parent root = null;
-        try {
+        if (employee  instanceof Worker) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Onemogućeno brisanje");
+            alert.setHeaderText("Onemogućeno brisanje");
+            alert.setContentText("Odjel može obrisati samo menadžer!");
 
-            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Department.fxml" ), bundle);
-            DepartmentController departmentController = new DepartmentController();
-            loader.setController(departmentController);
-            root = loader.load();
-            Locale.setDefault(new Locale("bs", "BA"));
-            stage.setScene(new Scene(root));
-            stage.setTitle(bundle.getString("Add_new_department"));
-            stage.setResizable(true);
-            stage.show();
-            stage.setOnHiding( event -> {
-                Department dep = departmentController.getDepartment();
-                if (dep != null) {
-                    dao.addDepartment(dep);
-                    tableViewDepartments.setItems(FXCollections.observableArrayList(dao.getDepartments()));
-                }
-            } );
+            alert.showAndWait();
+        }
+        else {
+            Parent root = null;
+            try {
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Department.fxml"), bundle);
+                DepartmentController departmentController = new DepartmentController();
+                loader.setController(departmentController);
+                root = loader.load();
+                Locale.setDefault(new Locale("bs", "BA"));
+                stage.setScene(new Scene(root));
+                stage.setTitle(bundle.getString("Add_new_department"));
+                stage.setResizable(true);
+                stage.show();
+                stage.setOnHiding(event -> {
+                    Department dep = departmentController.getDepartment();
+                    if (dep != null) {
+                        dao.addDepartment(dep);
+                        tableViewDepartments.setItems(FXCollections.observableArrayList(dao.getDepartments()));
+                    }
+                });
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
