@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.controllers.LogInController;
 import ba.unsa.etf.rpr.utilities.HrDAO;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,8 +25,8 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(ApplicationExtension.class)
@@ -87,7 +86,7 @@ public class LogInConrollerTest {
 
 
         robot.clickOn("#fieldEmail");
-        robot.write("asabanovi6@etf.unsa.ba");
+        robot.write("manager@account.com");
         robot.clickOn("#fieldPassword");
         robot.write("password");
 
