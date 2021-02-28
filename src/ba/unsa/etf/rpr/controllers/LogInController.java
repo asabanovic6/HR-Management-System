@@ -23,8 +23,10 @@ public class LogInController {
     public PasswordField fieldPassword;
     private Employee employee;
     private HrDAO dao;
+    public Stage stage;
     public LogInController() {
-        dao= HrDAO.getInstance();
+        this.dao= HrDAO.getInstance();
+        this.stage = new Stage();
     }
 
     @FXML
@@ -95,7 +97,6 @@ public class LogInController {
         else  {
             if (employee == null) employee = new Employee();
             employee= dao.getEmployee(fieldEmail.getText());
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
@@ -106,9 +107,9 @@ public class LogInController {
                 stage.setScene(new Scene(root));
                 stage.setMaximized(true);
                 stage.setResizable(true);
+                stage.show();
                 Stage thisStage = (Stage) fieldEmail.getScene().getWindow();
                 thisStage.close();
-                stage.show();
 
             } catch (IOException e) {
                 e.printStackTrace();

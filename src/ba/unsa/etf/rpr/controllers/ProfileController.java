@@ -32,6 +32,7 @@ public class ProfileController {
     public TextField fieldSalary;
     public  TextField fieldCmp;
     public TextField filedTypeOfEmployment;
+    public Stage stage ;
     @FXML
     private ImageView imgView;
 
@@ -45,6 +46,7 @@ public class ProfileController {
         this.edate= new SimpleStringProperty(employee.getExpireDate().toString());
         this.salary= new SimpleStringProperty( ""+employee.getSalary());
         this.cmp = new SimpleStringProperty(""+employee.getCmp());
+        this.stage =  new Stage();
         if (employee instanceof Manager) this.man= new SimpleStringProperty("/");
         else if (employee instanceof  Worker){
             this.man = new SimpleStringProperty( ((Worker) employee).getManager().getEmployeeName());
@@ -91,7 +93,7 @@ public class ProfileController {
 
     public void clickCancel (ActionEvent actionEvent) {
 
-            Stage stage = new Stage();
+
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
@@ -102,10 +104,9 @@ public class ProfileController {
                 stage.setScene(new Scene(root));
                 stage.setMaximized(true);
                 stage.setResizable(true);
+                stage.show();
                 Stage thisstage = (Stage) fieldEmployeeName.getScene().getWindow();
                 thisstage.close();
-                stage.show();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -113,7 +114,7 @@ public class ProfileController {
     }
 
     public void changePassword (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangePassword.fxml"));

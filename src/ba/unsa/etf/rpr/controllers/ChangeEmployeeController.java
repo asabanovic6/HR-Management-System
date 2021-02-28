@@ -35,11 +35,13 @@ public class ChangeEmployeeController {
     public DatePicker pickerExpireDate;
     public TextField fieldSalary;
     public  TextField fieldCmp;
+    public Stage stage ;
     private HrDAO dao;
     @FXML
     private ImageView imgView;
 
     public ChangeEmployeeController (Employee employee) {
+        this.stage=new Stage();
         this.employee = employee;
         this.name= new SimpleStringProperty(employee.getEmployeeName());
         this.email = new SimpleStringProperty(employee.getEmail());
@@ -163,7 +165,7 @@ public class ChangeEmployeeController {
     }
     public void clickCancel (ActionEvent actionEvent) {
 
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
@@ -248,7 +250,7 @@ public class ChangeEmployeeController {
         employee.setHireDate(pickerHireDate.getValue());
         employee.setExpireDate(pickerExpireDate.getValue());
 
-        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
+         stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
 }

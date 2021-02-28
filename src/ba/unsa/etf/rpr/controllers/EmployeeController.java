@@ -34,25 +34,22 @@ public class EmployeeController {
     public DatePicker pickerHireDate;
     public DatePicker pickerExpireDate;
     public ChoiceBox<String> choiceJob;
-    public ObservableList<String> jobs= FXCollections.observableArrayList();
+    public ObservableList<String> jobs;
     public ChoiceBox<String> choiceDepartment;
-    public ObservableList<String> departments= FXCollections.observableArrayList();
+    public ObservableList<String> departments;
     private Employee employee;
     private HrDAO dao;
+    public Stage stage;
     @FXML
     private ImageView imgView;
 
     public EmployeeController() {
-        dao = HrDAO.getInstance();
-        jobs = FXCollections.observableArrayList(dao.getJobs());
-        departments = FXCollections.observableArrayList(dao.getDepartmentsByNames());
+        this.dao = HrDAO.getInstance();
+        this.jobs = FXCollections.observableArrayList(dao.getJobs());
+        this.departments = FXCollections.observableArrayList(dao.getDepartmentsByNames());
+        this.stage= new Stage();
     }
 
-    public EmployeeController(Employee employee, ArrayList<String> jobs,ArrayList<String> departments) {
-        this.employee = employee;
-        this.jobs = FXCollections.observableArrayList(jobs);
-        this.departments=FXCollections.observableArrayList(departments);
-    }
 
     @FXML
     public void initialize() {
@@ -185,11 +182,11 @@ public class EmployeeController {
     }
 
     public void clickCancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
+         stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
     public void addNewJob (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Job.fxml"));
@@ -213,7 +210,7 @@ public class EmployeeController {
         }
     }
     public void addNewDepartment (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/department.fxml"));
@@ -304,7 +301,7 @@ public class EmployeeController {
         employee.setHireDate(pickerHireDate.getValue());
         employee.setExpireDate(pickerExpireDate.getValue());
 
-        Stage stage = (Stage) fieldEmployeeName.getScene().getWindow();
+         stage = (Stage) fieldEmployeeName.getScene().getWindow();
         stage.close();
     }
 }

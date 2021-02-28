@@ -21,16 +21,17 @@ public class MenuController {
     public Label label1;
    private  Employee employee;
    private HrDAO dao ;
-
+   public Stage stage ;
 
     public MenuController(Employee employee) {
 
         this.employee=employee;
         this.dao = HrDAO.getInstance();
+        this.stage= new Stage();
     }
 
     public void departments (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Departments.fxml"));
@@ -50,7 +51,6 @@ public class MenuController {
     }
 
     public void employees (ActionEvent actionEvent) {
-        Stage stage = new Stage();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
@@ -69,7 +69,7 @@ public class MenuController {
         }
     }
    public void managers (ActionEvent actionEvent) {
-       Stage stage = new Stage();
+
        Parent root = null;
        try {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
@@ -96,7 +96,7 @@ public class MenuController {
 
     }
     public void selfProfile (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profile.fxml"));
@@ -117,7 +117,7 @@ public class MenuController {
     }
 
     public void logOut (ActionEvent actionEvent) {
-        Stage stage = new Stage();
+
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LogIn.fxml"));

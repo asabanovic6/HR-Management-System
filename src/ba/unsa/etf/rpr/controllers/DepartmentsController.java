@@ -34,6 +34,8 @@ public class DepartmentsController {
    private ObservableList<Department> departments;
    private HrDAO dao;
   private Employee employee;
+  public Stage stage ;
+
     @FXML
     private ImageView imgView;
 
@@ -42,6 +44,7 @@ public class DepartmentsController {
         this.employee=employee;
         this.dao= HrDAO.getInstance();
         this.departments= FXCollections.observableArrayList(dao.getDepartments());
+        this.stage= new Stage();
     }
 
     @FXML
@@ -56,7 +59,6 @@ public class DepartmentsController {
     }
 
     public void addDepartment (ActionEvent actionEvent) {
-        Stage stage = new Stage();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Department.fxml"));
@@ -116,7 +118,6 @@ public class DepartmentsController {
         }
     }
    public void clickCancel (ActionEvent actionEvent) {
-       Stage stage = new Stage();
        Parent root = null;
        try {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));

@@ -14,6 +14,7 @@ public class JobController {
     public TextField fieldMinSalary;
     public TextField fieldMaxSalary;
     private Job job;
+    public Stage stage;
 
     @FXML
     private ImageView imgView;
@@ -23,6 +24,7 @@ public class JobController {
 
     public JobController(Job job) {
         this.job = job;
+        this.stage= new Stage();
     }
     public Job getJob() {
         return job;
@@ -159,7 +161,7 @@ public class JobController {
         this.job.setJobTitle(fieldJobTitle.getText());
        this.job.setMinSalary(Integer.parseInt(fieldMinSalary.getText()));
         this.job.setMaxSalary(Integer.parseInt(fieldMaxSalary.getText()));
-        Stage stage = (Stage) fieldJobTitle.getScene().getWindow();
+         stage = (Stage) fieldJobTitle.getScene().getWindow();
         stage.close();
     }
 

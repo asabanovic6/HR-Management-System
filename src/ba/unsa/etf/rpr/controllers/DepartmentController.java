@@ -28,22 +28,25 @@ public class DepartmentController {
     public  ObservableList<String> locations;
     private Department department;
     private HrDAO dao;
+    public Stage stage;
 
     @FXML
     private ImageView imgView;
 
     public DepartmentController() {
-        dao = HrDAO.getInstance();
-        managers = FXCollections.observableArrayList(dao.getManagers());
-        locations = FXCollections.observableArrayList(dao.getLocationsName());
+        this.dao = HrDAO.getInstance();
+        this.managers = FXCollections.observableArrayList(dao.getManagers());
+        this.locations = FXCollections.observableArrayList(dao.getLocationsName());
+        this.stage = new Stage();
 
     }
 
     public DepartmentController(Department department) {
-        dao = HrDAO.getInstance();
+        this.dao = HrDAO.getInstance();
         this.department = department;
         this.managers =  FXCollections.observableArrayList(dao.getManagers());
         this.locations = FXCollections.observableArrayList(dao.getLocationsName());
+        this.stage = new Stage();
     }
 
     public Department getDepartment() {
@@ -117,7 +120,7 @@ public class DepartmentController {
     }
     public void clickCancel(ActionEvent actionEvent) {
         department = null;
-        Stage stage = (Stage) fieldDepName.getScene().getWindow();
+         stage = (Stage) fieldDepName.getScene().getWindow();
         stage.close();
     }
     public void clickOk(ActionEvent actionEvent) {
@@ -146,7 +149,7 @@ public class DepartmentController {
             this.department.setDepartmentName(fieldDepName.getText());
             this.department.setManagerId(dao.searchEmployeeByName(choiceManager.getSelectionModel().getSelectedItem()).getEmployeeId());
             this.department.setLocationId(dao.searchLocationsByName(choiceLocation.getSelectionModel().getSelectedItem()).getLocationId());
-            Stage stage = (Stage) fieldDepName.getScene().getWindow();
+             stage = (Stage) fieldDepName.getScene().getWindow();
             stage.close();
 
         }

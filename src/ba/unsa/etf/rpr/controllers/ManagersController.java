@@ -44,6 +44,8 @@ public class ManagersController {
     public TableColumn colEmployment;
     public TableColumn colSalary;
     public TableColumn colCmp;
+    public Stage stage;
+
     @FXML
     private ImageView imgView;
 
@@ -51,6 +53,7 @@ public class ManagersController {
         this.employee=employee;
         this.dao=HrDAO.getInstance();
             this.employees= FXCollections.observableArrayList(dao.getAllManagers());
+            this.stage = new Stage();
 
     }
 
@@ -80,7 +83,6 @@ public class ManagersController {
         );
     }
     public void clikcCancel (ActionEvent actionEvent) {
-        Stage stage = new Stage();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
@@ -110,7 +112,6 @@ public class ManagersController {
             alert.showAndWait();
         }
         else {
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Employee.fxml"));
@@ -148,7 +149,6 @@ public class ManagersController {
             alert.showAndWait();
         }
         else {
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangeEmployee.fxml"));

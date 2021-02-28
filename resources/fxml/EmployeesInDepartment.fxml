@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/employee.css" />
     </stylesheets>
@@ -15,11 +15,11 @@
             <columns>
                 <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="colName" prefWidth="100.0" text="Ime i prezime" />
-                <TableColumn fx:id="colEmail" prefWidth="100.0" text="E-mail" />
+                <TableColumn fx:id="colEmail" minWidth="-Infinity" prefWidth="120.0" text="E-mail" />
                 <TableColumn fx:id="colDepartment" prefWidth="100.0" text="Odjel" />
                 <TableColumn fx:id="colJob" prefWidth="100.0" text="Posao" />
-                <TableColumn fx:id="colHireDate" prefWidth="100.0" text="Datum zaposlenja" />
-                <TableColumn fx:id="colExpireDate" prefWidth="100.0" text="Datum isteka ugovora" />
+                <TableColumn fx:id="colHireDate" minWidth="-Infinity" prefWidth="130.0" text="Datum zaposlenja" />
+                <TableColumn fx:id="colExpireDate" minWidth="-Infinity" prefWidth="130.0" text="Datum isteka ugovora" />
                 <TableColumn fx:id="colEmployment" prefWidth="100.0" text="Tip zaposlenja" />
                 <TableColumn fx:id="colSalary" prefWidth="100.0" text="Plata" />
                 <TableColumn fx:id="colCmp" prefWidth="100.0" text="Dodatak na platu" />

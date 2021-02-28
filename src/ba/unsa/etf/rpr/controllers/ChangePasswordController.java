@@ -17,11 +17,13 @@ public class ChangePasswordController {
     public TextField fieldNewPasswordSec;
     private Employee employee;
     private HrDAO dao;
+    public Stage stage;
     @FXML
     private ImageView imgView;
     public ChangePasswordController(Employee employee) {
         this.dao = HrDAO.getInstance();
         this.employee=employee;
+        this.stage= new Stage();
     }
 
     @FXML
@@ -68,7 +70,7 @@ public class ChangePasswordController {
         return true;
     }
     public void clickCancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) fieldNewPasswordSec.getScene().getWindow();
+         stage = (Stage) fieldNewPasswordSec.getScene().getWindow();
         stage.close();
     }
 
@@ -93,8 +95,8 @@ public class ChangePasswordController {
         }
         else {
             dao.changePassword(employee,fieldNewPassword.getText());
-            Stage thisStage = (Stage) fieldNewPasswordSec.getScene().getWindow();
-            thisStage.close();
+             stage = (Stage) fieldNewPasswordSec.getScene().getWindow();
+            stage.close();
         }
     }
 }

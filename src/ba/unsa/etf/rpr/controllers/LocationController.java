@@ -15,18 +15,16 @@ public class LocationController {
     public TextField fieldCity;
     private HrDAO dao;
     private Location location;
-
+    public Stage stage;
     @FXML
     private ImageView imgView;
 
-    public LocationController() {
-        this.dao= HrDAO.getInstance();
-        this.location = new Location();
-    }
+
 
     public LocationController(Location location) {
         this.dao= HrDAO.getInstance();
         this.location = location;
+        this.stage = new Stage();
     }
 
     public Location getLocation() {
@@ -64,7 +62,7 @@ public class LocationController {
     }
     public void clickCancel(ActionEvent actionEvent) {
         location = null;
-        Stage stage = (Stage) fieldCity.getScene().getWindow();
+         stage = (Stage) fieldCity.getScene().getWindow();
         stage.close();
     }
 
@@ -93,7 +91,7 @@ public class LocationController {
 
             if (location==null) this.location = new Location();
             this.location.setCity(fieldCity.getText());
-            Stage stage = (Stage) fieldCity.getScene().getWindow();
+             stage = (Stage) fieldCity.getScene().getWindow();
             stage.close();
         }
     }

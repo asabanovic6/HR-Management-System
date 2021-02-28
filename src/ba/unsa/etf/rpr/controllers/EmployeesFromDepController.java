@@ -44,6 +44,8 @@ public class EmployeesFromDepController {
     public TableColumn colEmployment;
     public TableColumn colSalary;
     public TableColumn colCmp;
+    public  Stage stage ;
+
     @FXML
     private ImageView imgView;
 
@@ -54,7 +56,7 @@ public class EmployeesFromDepController {
         this.employees= FXCollections.observableArrayList(dao.getWorkersFromManager(employee.getEmployeeId()));
         if (employee instanceof  Worker)
             this.employees= FXCollections.observableArrayList(dao.getWorkersFromManager(((Worker) employee).getManager().getEmployeeId()));
-
+     this.stage=new Stage();
     }
 
     @FXML
@@ -82,7 +84,6 @@ public class EmployeesFromDepController {
         );
     }
     public void clikcCancel (ActionEvent actionEvent) {
-        Stage stage = new Stage();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
@@ -93,9 +94,9 @@ public class EmployeesFromDepController {
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
+            stage.show();
             Stage thisstage = (Stage) tableViewEmployees.getScene().getWindow();
             thisstage.close();
-            stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,7 +113,6 @@ public class EmployeesFromDepController {
             alert.showAndWait();
         }
         else {
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Employee.fxml"));
@@ -150,7 +150,6 @@ public class EmployeesFromDepController {
             alert.showAndWait();
         }
         else {
-            Stage stage = new Stage();
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangeEmployee.fxml"));
