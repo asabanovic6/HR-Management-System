@@ -41,17 +41,17 @@
                       </Button>
                   </children>
             </HBox>
-              <Label fx:id="Label1" text="Naziv odjela: ">
+              <Label fx:id="Label1" text="%Department_name">
                   <GridPane.margin>
                       <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                   </GridPane.margin>
               </Label>
-              <Label fx:id="Label2" text="Menadžer odjela: " GridPane.rowIndex="1">
+              <Label fx:id="Label2" text="%Manager" GridPane.rowIndex="1">
                   <GridPane.margin>
                       <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                   </GridPane.margin>
               </Label>
-              <Label fx:id="Label3" text="Lokacija odjela: " GridPane.rowIndex="2">
+              <Label fx:id="Label3" text="%Location" GridPane.rowIndex="2">
                   <GridPane.margin>
                       <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                   </GridPane.margin>
@@ -63,7 +63,7 @@
             </TextField>
             <ChoiceBox fx:id="choiceManager" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <ChoiceBox fx:id="choiceLocation" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="BtnAddLocation" mnemonicParsing="false" onAction="#addLocation" text="Dodaj novu lokaciju" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="BtnAddLocation" mnemonicParsing="false" onAction="#addLocation" text="%Add_new_location" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
           </children>
       </GridPane>
    </center>

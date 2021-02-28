@@ -42,17 +42,17 @@
                     </Button>
                 </children>
             </HBox>
-            <Label fx:id="Label1" text="Naziv posla: " GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="Label1" text="%Job_name" GridPane.columnIndex="1" GridPane.rowIndex="1">
              <GridPane.margin>
                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
              </GridPane.margin>
             </Label>
-            <Label fx:id="Label2" text="Minimalna plata: " GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="Label2" text="%Min_salary" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <GridPane.margin>
                     <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                 </GridPane.margin>
             </Label>
-             <Label fx:id="Label3" text="Maximalna plata: " GridPane.columnIndex="1" GridPane.rowIndex="3">
+             <Label fx:id="Label3" text="%Max_salary" GridPane.columnIndex="1" GridPane.rowIndex="3">
                  <GridPane.margin>
                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                  </GridPane.margin>

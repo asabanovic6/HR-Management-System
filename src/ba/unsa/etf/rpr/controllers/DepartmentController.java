@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class DepartmentController {
     public TextField fieldDepName;
@@ -98,11 +100,13 @@ public class DepartmentController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Location.fxml"));
-            LocationController locationController = new LocationController(null);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Location.fxml" ), bundle);            LocationController locationController = new LocationController(null);
             loader.setController(locationController);
             root = loader.load();
-            stage.setTitle("Dodaj novu lokaciju");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Add_new_location"));
             stage.setScene(new Scene(root, 400, 265));
             stage.setResizable(true);
             stage.show();

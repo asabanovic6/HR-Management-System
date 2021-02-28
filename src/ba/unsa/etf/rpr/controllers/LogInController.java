@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LogInController {
     public TextField fieldEmail;
@@ -99,11 +101,14 @@ public class LogInController {
             employee= dao.getEmployee(fieldEmail.getText());
             Parent root = null;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
+
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Menu.fxml" ), bundle);
                 MenuController menuController = new MenuController(employee);
                 loader.setController(menuController);
                 root = loader.load();
-                stage.setTitle("Dodaj novu lokaciju");
+                Locale.setDefault(new Locale("bs", "BA"));
+                stage.setTitle(bundle.getString("MenuStage"));
                 stage.setScene(new Scene(root));
                 stage.setMaximized(true);
                 stage.setResizable(true);

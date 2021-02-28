@@ -17,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ProfileController {
 
@@ -96,11 +98,14 @@ public class ProfileController {
 
             Parent root = null;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
+
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Menu.fxml" ), bundle);
                 MenuController menuController = new MenuController(employee);
                 loader.setController(menuController);
+                Locale.setDefault(new Locale("bs", "BA"));
                 root = loader.load();
-                stage.setTitle("Dodaj novu lokaciju");
+                stage.setTitle(bundle.getString("MenuStage"));
                 stage.setScene(new Scene(root));
                 stage.setMaximized(true);
                 stage.setResizable(true);
@@ -117,11 +122,13 @@ public class ProfileController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangePassword.fxml"));
-            ChangePasswordController changePasswordController = new ChangePasswordController(employee);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/ChangePassword.fxml" ), bundle);            ChangePasswordController changePasswordController = new ChangePasswordController(employee);
             loader.setController(changePasswordController);
             root = loader.load();
-            stage.setTitle("Promijeni password");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Change_password"));
             stage.setScene(new Scene(root, 600, 300));
             stage.setResizable(true);
             stage.show();

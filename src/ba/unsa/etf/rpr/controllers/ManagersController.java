@@ -22,7 +22,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
@@ -85,11 +87,13 @@ public class ManagersController {
     public void clikcCancel (ActionEvent actionEvent) {
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
-            MenuController menuController = new MenuController(employee);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Menu.fxml" ), bundle);            MenuController menuController = new MenuController(employee);
             loader.setController(menuController);
             root = loader.load();
-            stage.setTitle("Dodaj novu lokaciju");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("MenuStage"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
@@ -114,11 +118,14 @@ public class ManagersController {
         else {
             Parent root = null;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Employee.fxml"));
+
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Employee.fxml" ), bundle);
                 EmployeeController employeeController = new EmployeeController();
                 loader.setController(employeeController);
                 root = loader.load();
-                stage.setTitle("Dodaj novog zaposlenog");
+                Locale.setDefault(new Locale("bs", "BA"));
+                stage.setTitle(bundle.getString("Add_new_employee"));
                 stage.setScene(new Scene(root));
 
                 stage.setResizable(true);
@@ -151,11 +158,14 @@ public class ManagersController {
         else {
             Parent root = null;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChangeEmployee.fxml"));
+
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/ChangeEmployee.fxml" ), bundle);
                 ChangeEmployeeController changeEmployeeController = new ChangeEmployeeController(emp);
                 loader.setController(changeEmployeeController);
                 root = loader.load();
-                stage.setTitle("Izmijeni zaspolenika");
+                Locale.setDefault(new Locale("bs", "BA"));
+                stage.setTitle(bundle.getString("Change_employee"));
                 stage.setScene(new Scene(root, USE_PREF_SIZE, USE_PREF_SIZE));
                 stage.setResizable(true);
                 stage.show();

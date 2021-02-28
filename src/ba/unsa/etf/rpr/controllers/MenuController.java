@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MenuController {
     public Label label1;
@@ -34,11 +36,13 @@ public class MenuController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Departments.fxml"));
-            DepartmentsController departmentsController = new DepartmentsController(employee);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Departments.fxml" ), bundle);            DepartmentsController departmentsController = new DepartmentsController(employee);
             loader.setController(departmentsController);
             root = loader.load();
-            stage.setTitle("Odjeli");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Departments"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
@@ -53,11 +57,13 @@ public class MenuController {
     public void employees (ActionEvent actionEvent) {
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
-            EmployeesFromDepController employeesFromDepController = new EmployeesFromDepController(employee);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/EmployeesInDepartment.fxml" ), bundle);            EmployeesFromDepController employeesFromDepController = new EmployeesFromDepController(employee);
             loader.setController(employeesFromDepController);
             root = loader.load();
-            stage.setTitle("Zaposleni");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("EmployeesStage"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
@@ -72,11 +78,13 @@ public class MenuController {
 
        Parent root = null;
        try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
-           ManagersController managersController = new ManagersController(employee);
+
+           ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+           FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/EmployeesInDepartment.fxml" ), bundle);           ManagersController managersController = new ManagersController(employee);
            loader.setController(managersController);
            root = loader.load();
-           stage.setTitle("Menadžeri");
+           Locale.setDefault(new Locale("bs", "BA"));
+           stage.setTitle(bundle.getString("ManagersStage"));
            stage.setScene(new Scene(root));
            stage.setMaximized(true);
            stage.setResizable(true);
@@ -99,11 +107,14 @@ public class MenuController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profile.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Profile.fxml" ), bundle);
             ProfileController profileController = new ProfileController(employee);
             loader.setController(profileController);
             root = loader.load();
-            stage.setTitle("Profil");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("ProfileStage"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
@@ -120,11 +131,14 @@ public class MenuController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LogIn.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/LogIn.fxml" ), bundle);
             LogInController logInController = new LogInController();
             loader.setController(logInController);
             root = loader.load();
-            stage.setTitle("Prijavi se");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("LogInStage"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);

@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class EmployeeController {
 
@@ -189,11 +191,14 @@ public class EmployeeController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Job.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Job.fxml" ), bundle);
             JobController jobController = new JobController(null);
             loader.setController(jobController);
             root = loader.load();
-            stage.setTitle("Dodaj novi posao u listu poslova");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Add_new_job"));
             stage.setScene(new Scene(root));
             stage.setResizable(true);
             stage.show();
@@ -213,11 +218,13 @@ public class EmployeeController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/department.fxml"));
-            DepartmentController departmentController = new DepartmentController(null);
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Department.fxml" ), bundle);            DepartmentController departmentController = new DepartmentController(null);
             loader.setController(departmentController);
             root = loader.load();
-            stage.setTitle("Dodaj novi odjel u listu odjela");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Add_new_department"));
             stage.setScene(new Scene(root));
             stage.setResizable(true);
             stage.show();

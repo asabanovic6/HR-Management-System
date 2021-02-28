@@ -23,7 +23,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 
 public class DepartmentsController {
@@ -61,13 +63,15 @@ public class DepartmentsController {
     public void addDepartment (ActionEvent actionEvent) {
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Department.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Department.fxml" ), bundle);
             DepartmentController departmentController = new DepartmentController();
             loader.setController(departmentController);
             root = loader.load();
-            stage.setTitle("Dodaj novi odjel");
+            Locale.setDefault(new Locale("bs", "BA"));
             stage.setScene(new Scene(root));
-
+            stage.setTitle(bundle.getString("Add_new_department"));
             stage.setResizable(true);
             stage.show();
             stage.setOnHiding( event -> {
@@ -120,11 +124,13 @@ public class DepartmentsController {
    public void clickCancel (ActionEvent actionEvent) {
        Parent root = null;
        try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Menu.fxml"));
+           ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+           FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/Menu.fxml" ), bundle);
            MenuController menuController = new MenuController(employee);
            loader.setController(menuController);
            root = loader.load();
-           stage.setTitle("Dodaj novu lokaciju");
+           Locale.setDefault(new Locale("bs", "BA"));
+           stage.setTitle(bundle.getString("MenuStage"));
            stage.setScene(new Scene(root));
            stage.setMaximized(true);
            stage.setResizable(true);

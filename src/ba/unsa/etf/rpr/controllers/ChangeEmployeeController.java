@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ChangeEmployeeController {
     private Employee employee;
@@ -168,11 +170,14 @@ public class ChangeEmployeeController {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmployeesInDepartment.fxml"));
+
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/EmployeesInDepartment.fxml" ), bundle);
             EmployeesFromDepController employeesFromDepController = new EmployeesFromDepController(employee);
             loader.setController(employeesFromDepController);
             root = loader.load();
-            stage.setTitle("Zaposleni");
+            Locale.setDefault(new Locale("bs", "BA"));
+            stage.setTitle(bundle.getString("Employees_from_department"));
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
             stage.setResizable(true);
