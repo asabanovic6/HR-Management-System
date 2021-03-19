@@ -6,7 +6,7 @@ This application is still in deployment. This application also will offer to man
 
 • Full stack application for a personal project ( front-end still in development)
 
-• Using JavaFx, SQLite
+• Using JavaFx, SQLite for create local database
 
 • Implemented using MVC and DAL patterns
 
