@@ -14,13 +14,54 @@ This application is still in deployment. This application also will offer to man
 • Tested using Unit Tests and TestFx
 
 ## Usage
-![Test image 1](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/logIn.jpg)
+
+![image 1](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/logIn.jpg)
 
 Log in - manager account : manager@account.com
 
 Log in - employee account : employee@account.com
 
-![Test image 2](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Menu.jpg)
-![Test image 3](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Profile.jpg)
-![Test image 4](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Employees.jpg)
-![Test image 4](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Report.jpg)
+Menu: 
+
+![image 2](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Menu.jpg)
+
+User profile interface and how to change password:
+
+![image 3](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Profile.jpg)
+
+List of all employees in the same department: (if you click on the 'Menadzeri' in Menu you can see same table of all managers)
+
+![image 4](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Employees.jpg)
+
+Report:
+
+![image 4](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Report.jpg)
+
+##Getting started
+
+###Prerequisites
+
+You can start this project using jar file, but if you want you can build this project from Main class. 
+
+In that case list of library you have to include in your Meaven before runing Main class:
+
+```bash
+org.testfx:testfx-junit5:4.0.15-alpha
+```
+
+```bash
+net.sf.jasperreports:jasperreports:6.11.0
+```
+
+```bash
+org.xerial:sqlite-jdbc:3.21.0
+```
+
+
+
+
+
+
+
+
+
