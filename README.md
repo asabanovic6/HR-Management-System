@@ -37,9 +37,11 @@ Report:
 
 ![image 4](https://github.com/asabanovic6/HR-Management-System/blob/master/resources/Interface/Report.jpg)
 
-##Getting started
 
-###Prerequisites
+## Getting started
+
+
+### Prerequisites
 
 You can start this project using jar file, but if you want you can build this project from Main class. 
 
